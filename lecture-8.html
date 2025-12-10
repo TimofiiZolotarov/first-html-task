@@ -393,10 +393,10 @@ ostream&amp; operator&lt;&lt;(ostream&amp; os, const Fraction&amp; q) {
     os &lt;&lt; q.num &lt;&lt; '/' &lt;&lt; q.den;
     return os;
 }</code></pre>
-                    <h3><strong>4. Оператор виведення <<</strong></h3>
+                    <h3><strong>4. Оператор виведення &lt;&lt;</strong></h3>
                     <p><strong>Пояснення:</strong></p>
                     <ul>
-                        <li>перевантажуємо оператор <<, щоб можна було писати:</li>
+                        <li>перевантажуємо оператор &lt;&lt;, щоб можна було писати:</li>
                     </ul>
                     <pre><code class="language-cpp">cout &lt;&lt; q;</code></pre>
                     <ul>
@@ -431,7 +431,7 @@ cout &lt;&lt; f;   // виведе: 3/5</code></pre>
                             <td>створює a/b або помилку, якщо b=0</td>
                         </tr>
                         <tr>
-                            <td>operator<<</td>
+                            <td>operator&lt;&lt;</td>
                             <td>виводить дріб у вигляді "a/b"</td>
                         </tr>
                         </tbody>
@@ -496,7 +496,7 @@ Fraction copy;</code></pre>
                     <pre><code class="language-cpp">cout &lt;&lt; "half = " &lt;&lt; half;</code></pre>
                     <ul>
                         <li>
-                            завдяки перевантаженому оператору <<, об’єкти типу Fraction
+                            завдяки перевантаженому оператору &lt;&lt;, об'єкти типу Fraction
                             виводяться у форматі:
                         </li>
                     </ul>
@@ -537,8 +537,8 @@ copy = 1/2</code></pre>
                             <td>копіює значення структури</td>
                         </tr>
                         <tr>
-                            <td>cout << f;</td>
-                            <td>друкує дріб через перевантажений оператор <<</td>
+                            <td>cout &lt;&lt; f;</td>
+                            <td>друкує дріб через перевантажений оператор &lt;&lt;</td>
                         </tr>
                         </tbody>
                     </table>
@@ -663,8 +663,8 @@ cout &lt;&lt; "average = " &lt;&lt; S * Fraction(1, N) &lt;&lt; '\n';</code></pr
                         </li>
                         <li>
                             Функції з ім’ям operator дозволяють
-                            <strong>перевантажити стандартні оператори</strong> (+, *, >>,
-                            <<).
+                            <strong>перевантажити стандартні оператори</strong> (+, *, &gt;&gt;,
+                            &lt;&lt;).
                         </li>
                         <li>
                             Структури з конструкторами й операторами можна використовувати
