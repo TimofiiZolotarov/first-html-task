@@ -74,7 +74,7 @@ used = 8 // фактично використано елементів</code></p
                     <h3><strong>2. Додавання нових елементів (7, 8, 9)</strong></h3>
                     <p>Щоб <strong>доповнити послідовність</strong>, треба:</p>
                     <ul>
-                        <li>перевірити, чи є вільні позиції у масиві (used < n);</li>
+                        <li>перевірити, чи є вільні позиції у масиві (used &lt; n);</li>
                         <li>якщо місця немає — <strong>створити новий масив</strong> більшого розміру;</li>
                         <li><strong>скопіювати</strong> туди старі елементи;</li>
                         <li><strong>додати нові</strong> (7, 8, 9);</li>
@@ -105,7 +105,7 @@ used = 5</code></pre>
                     <p><strong>Проблема:</strong> у масиві може не вистачити місця.</p>
                     <p>Тому перед операцією треба:</p>
                     <ul>
-                        <li>перевірити, чи used + кількість_дублікатів <= n;</li>
+                        <li>перевірити, чи used + кількість_дублікатів &lt;= n;</li>
                         <li>якщо ні — знову <strong>збільшити розмір масиву</strong>.</li>
                     </ul>
                     <p><strong>Покроково:</strong></p>
@@ -693,6 +693,8 @@ Node* L = new Node(32, new Node(45));</code></pre>
                         </tr>
                         </thead>
                         <tbody>
+                        <tr>
+                            <td colspan="3">
                         <table class="table table-bordered table-striped">
                             <thead class="table-dark">
                             <tr>
@@ -744,6 +746,10 @@ Node* L = new Node(32, new Node(45));</code></pre>
                             </tr>
                             </tbody>
                         </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                         <h2><strong>1. Проблема без “phantom”</strong></h2>
                         <p>Якщо у тебе список 10 → 20, і ти хочеш вставити:</p>
                         <ul>
@@ -769,7 +775,7 @@ Node* L = new Node(32, new Node(45));</code></pre>
                         <ul>
                             <li>place = phantom</li>
                             <li>place->link->value = 10</li>
-                            <li>10 < 5 ❌ → цикл <strong>не запускається</strong></li>
+                            <li>10 &lt; 5 ❌ → цикл <strong>не запускається</strong></li>
                         </ul>
                         <p>Вставляємо нову ланку:</p>
                         <pre><code class="language-cpp">place-&gt;link = new Node(x, place-&gt;link);</code></pre>
