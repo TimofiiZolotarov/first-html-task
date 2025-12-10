@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture n15.  Error handling. Exceptions. - Програмування</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+  <meta name="description" content="Lecture n15.  Error handling. Exceptions.">
+
+  <meta property="og:title" content="Lecture n15.  Error handling. Exceptions.">
+  <meta property="og:type" content="article">
+  <meta property="og:description" content="Lecture n15.  Error handling. Exceptions.">
+
+  <link rel="icon" href="https://www.w3schools.com/favicon.ico" sizes="any">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body class="bg-light">
+  <header class="bg-dark text-white py-4 mb-4">
+    <div class="container-fluid">
+      <a href="index.html" class="text-white text-decoration-none"><h1 class="mb-0">Програмування</h1></a>
+    </div>
+  </header>
+
+  <main class="container-fluid">
+    <div class="row">
+      <aside class="col-lg-3 mb-4">
+        <nav class="card sticky-lg-top">
+          <div class="card-body">
+            <h5 class="card-title">Зміст</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="lecture-6.html" class="text-decoration-none">Функції, параметри, вказівники</a></li>
+              <li class="mb-2"><a href="lecture-7.html" class="text-decoration-none">Масиви</a></li>
+              <li class="mb-2"><a href="lecture-8.html" class="text-decoration-none">Структури, конструктори</a></li>
+              <li class="mb-2"><a href="lecture-9.html" class="text-decoration-none">Лінійні списки</a></li>
+              <li class="mb-2"><a href="lecture-11.html" class="text-decoration-none">Потоки, рекурсія</a></li>
+              <li class="mb-2"><a href="lecture-13.html" class="text-decoration-none">Класи</a></li>
+              <li class="mb-2"><a href="lecture-15.html" class="text-decoration-none">Обробка помилок</a></li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+
+      <article class="col-lg-9">
+        <div class="card">
+          <div class="card-body">
+            <h1>Lecture n15.  Error handling. Exceptions.</h1>
+<hr>
+<h1><strong>1. Основні поняття</strong></h1>
+<h3><strong>Помилка (error)</strong></h3>
+<p>Будь-яка ситуація, коли програма не може коректно продовжувати обчислення.</p>
+<h3><strong>Аварійна ситуація (exceptional condition)</strong></h3>
+<p>Логічний або технічний збій, що потребує <strong>спеціальної реакції</strong> програми.</p>
+<h3><strong>Виняток (exception)</strong></h3>
+<p>Механізм C++, який дозволяє <em>асинхронно</em> (не через return) передати інформацію про помилку з місця її виникнення до коду, що її обробляє.</p>
+<h3><strong>Генерація винятку (throwing)</strong></h3>
+<p>Операція, яка:</p>
+<ol>
+<li>створює або копіює об’єкт винятку;</li>
+<li>перериває нормальний хід програми;</li>
+<li>запускає процес пошуку обробника (catch).</li>
+</ol>
+<h3><strong>Перехоплення винятку (catch)</strong></h3>
+<p>Блок коду, який призначений для обробки певного типу винятку.</p>
+<hr>
+<h1><strong>2. Мотивація використання винятків</strong></h1>
+<p>Без винятків функція повинна:</p>
+<ul>
+<li>або сама вирішувати всі помилки,</li>
+<li>або повідомляти про них через коди повернення,</li>
+<li>або завершувати програму.</li>
+</ul>
+<p>Усі три варіанти мають проблеми:</p>
+<ul>
+<li>переплутування логіки помилок і логіки обчислень;</li>
+<li>зростання кількості перевірок if;</li>
+<li>втрата інформації про місце виникнення помилки;</li>
+<li>небезпечне завершення роботи (abort).</li>
+</ul>
+<p>Винятки розділяють:</p>
+<ul>
+<li><strong>код, що виявляє проблему</strong>,</li>
+<li><strong>код, що вирішує проблему</strong>.</li>
+</ul>
+<p>Це <em>фундаментальний принцип структурованої обробки винятків</em>.</p>
+<hr>
+<h1><strong>3. Механізм винятків у C++ детально</strong></h1>
+<h2><strong>Генерація винятку (throw)</strong></h2>
+<pre><code class="language-cpp">throw obj;</code></pre>
+<p>Після throw:</p>
+<ol>
+<li>Обчислення негайно припиняється.</li>
+<li>Поточна функція починає згортатися: локальні об’єкти знищуються у зворотному порядку.</li>
+<li>Керування передається наверх по стеку викликів.</li>
+<li>У кожній функції перевіряються блоки catch.</li>
+<li>Перший відповідний catch — обробляє виняток.</li>
+</ol>
+<p>Цей процес називається <strong>stack unwinding — розгортання стека</strong>.</p>
+<hr>
+<h1><strong>4. Що таке stack unwinding</strong></h1>
+<p>Це:</p>
+<ul>
+<li>покрокове завершення функцій у зворотному порядку викликів,</li>
+<li>з викликом <strong>деструкторів</strong> усіх автоматичних (стекових) об’єктів,</li>
+<li>з передачею винятку зовні.</li>
+</ul>
+<p><em>Гарантія: жоден деструктор не буде пропущений.</em></p>
+<p>Це критично для звільнення ресурсів (пам’ять, файли, м’ютекси тощо).</p>
+<hr>
+<h1><strong>5. Типи винятків і їх роль</strong></h1>
+<h3><strong>Виняток — це об’єкт, а його тип — це спосіб ідентифікації проблеми.</strong></h3>
+<p>C++ дозволяє кидати:</p>
+<ul>
+<li>скалярні типи (int, char<em>);</li>
+<li>стандартні класи (runtime<em>error, logic</em>error);</li>
+<li>власні типи.</li>
+</ul>
+<h3><strong>Чому виняток повинен бути об’єктом?</strong></h3>
+<p>Бо він може містити:</p>
+<ul>
+<li>діагностичне повідомлення,</li>
+<li>числові коди,</li>
+<li>контекст помилки,</li>
+<li>значення, які спричинили помилку.</li>
+</ul>
+<p>Це дозволяє робити глибоку діагностику.</p>
+<hr>
+<h1><strong>6. Стандартна ієрархія винятків</strong></h1>
+<p>Основний базовий клас:</p>
+<pre><code class="language-cpp">std::exception</code></pre>
+<p>Його віртуальний метод:</p>
+<pre><code class="language-cpp">const char* what() const noexcept;</code></pre>
+<p>повертає текстове пояснення.</p>
+<p>Далі — два головних підрозділи:</p>
+<hr>
+<h2><strong>6.1. logic<em>error</strong></h2>
+<p>Помилки, які можна виявити до запуску алгоритму (детерміновані).</p>
+<p>Приклади:</p>
+<ul>
+<li>invalid</em>argument — неправильний аргумент функції;</li>
+<li>domain<em>error — значення за межами математичної області визначення;</li>
+<li>out</em>of<em>range — неправильний індекс контейнера;</li>
+<li>length</em>error — перевищення максимальної довжини.</li>
+</ul>
+<hr>
+<h2><strong>6.2. runtime<em>error</strong></h2>
+<p>Помилки, що можуть виникнути лише під час виконання.</p>
+<p>Приклади:</p>
+<ul>
+<li>overflow</em>error, underflow<em>error — числові переповнення;</li>
+<li>range</em>error — результати за межами діапазону;</li>
+<li>system<em>error — помилки ОС;</li>
+<li>regex</em>error — неправильний шаблон регулярного виразу.</li>
+</ul>
+<hr>
+<h1><strong>7. Користувацькі винятки</strong></h1>
+<p>Створюються для:</p>
+<ul>
+<li>точнішої ідентифікації помилок,</li>
+<li>передачі даних про некоректний стан.</li>
+</ul>
+<p>Типовий приклад — клас масиву, що визначає:</p>
+<ul>
+<li>class BadSize {};</li>
+<li>class BadIndex { int badInd; … };</li>
+</ul>
+<p>Це дає можливість:</p>
+<ul>
+<li>точно знати </em>в чому саме помилка<em>;</li>
+<li>передати інформацію про “поганий індекс”.</li>
+</ul>
+<hr>
+<h1><strong>8. Повторне кидання винятку (rethrow)</strong></h1>
+<p>У catch-блоці можна:</p>
+<pre><code class="language-cpp">throw;</code></pre>
+<p>Це повторно кидає </em>той самий<em> виняток.</p>
+<p>Для чого?</p>
+<ul>
+<li>якщо поточна функція <strong>частково обробила</strong> помилку (логування, очищення),</li>
+<li>але вирішення має відбутися <strong>вище</strong>.</li>
+</ul>
+<p>Це стандартний механізм <strong>error propagation</strong> у виняткових системах.</p>
+<hr>
+<h1><strong>9. Захист ресурсів (файли, пам’ять, м’ютекси)</strong></h1>
+<p>Проблема: якщо між fopen і fclose виник throw — файл залишиться відкритим.</p>
+<h3><strong>Спосіб 1 — try/catch з ручним закриттям</strong></h3>
+<p>Надійний, але громіздкий.</p>
+<h3><strong>Спосіб 2 — RAII (Resource Acquisition Is Initialization)</strong></h3>
+<p>Суть:</p>
+<ul>
+<li>Ресурс “належить” об’єкту.</li>
+<li>Деструктор автоматично звільняє ресурс.</li>
+<li>Звільнення відбувається гарантовано при винятку.</li>
+</ul>
+<p>Приклад:</p>
+<pre><code class="language-cpp">class FilePtr {
+    FILE* p;
+public:
+    FilePtr(const char* n, const char* a) { p = fopen(n, a); }
+    ~FilePtr() { fclose(p); }
+    FILE* operator()() { return p; }
+};</code></pre>
+<p>Це сучасний правильний підхід.</p>
+<hr>
+<h1><strong>10. Сутність механізму try–catch</strong></h1>
+<p>Умови, за якими вибирається catch-блок:</p>
+<ol>
+<li>catch перевіряються у порядку оголошення.</li>
+<li>Перший блок, тип якого </em>сумісний<em> з типом винятку, буде використано.</li>
+<li>catch(...) є універсальним і повинен стояти останнім.</li>
+</ol>
+<hr>
+<h1><strong>11. Важлива властивість винятків</strong></h1>
+<p>Винятки <strong>не змінюють сигнатуру функції</strong>.</p>
+<p>Вони дозволяють:</p>
+<ul>
+<li>писати чистий код обчислень,</li>
+<li>без домішок логіки перевірки і повернення помилок.</li>
+</ul>
+<p>Це один з ключових принципів: <strong>separation of concerns</strong>.</p>
+<hr>
+<h1><strong>12. Приклади некоректних аргументів у математичних функціях</strong></h1>
+<h3><strong>Гармонійне середнє:</strong></h3>
+<p>a == -b → ділення на нуль.</p>
+<h3><strong>Геометричне середнє:</strong></h3>
+<p>a < 0 || b < 0 → немає кореня з від’ємного.</p>
+<p>Функції сигналізують винятками, тому що:</p>
+<ul>
+<li>вони не можуть самі вирішити, що робити далі;</li>
+<li>користувач вирішує — повторити, завершити, логувати, ігнорувати.</li>
+</ul>
+<hr>
+<h1><strong>СПРОЩЕНА МАТЕМАТИЧНА СУТЬ ВИНЯТКІВ</strong></h1>
+<p>Виняток — це <strong>розрив нормального потоку виконання</strong> з передачею керування у точку, де рішення про помилку може бути ухваленим.</p>
+<p>Це <strong>аналог “goto”, але безпечною, структурованою, типізованою формою з гарантіями очищення</strong>.</p>
+<hr>
+<h1><strong>Питання для самоперевірки (просунуті)</strong></h1>
+<ol>
+<li>Чим відрізняється виняткова ситуація від логічної помилки?</li>
+<li>Опишіть механізм stack unwinding та порядок виклику деструкторів.</li>
+<li>Чому catch(const exception& e) важливіший за catch(…)?</li>
+<li>Наведіть приклад, де коди повернення </em>гарантовано* провалять обробку помилки.</li>
+<li>Поясніть різницю між логічними та рантайм-помилками у стандартній ієрархії.</li>
+<li>Чому винятки не змінюють сигнатуру функції?</li>
+<li>У яких випадках повторне кидання винятку є необхідним?</li>
+<li>Як RAII забезпечує коректність роботи при винятках?</li>
+<li>Чому в catch(BadIndex bi) краще ловити по <strong>посиланню</strong>, а не по значенню?</li>
+<li>Які наслідки необробленого винятку?</li>
+</ol>
+<hr>
+<p>#</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-0">Золотарьов Тимофій. 2025 Конспект лекцій з програмування.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

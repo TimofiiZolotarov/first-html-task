@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Lecture n13.2 Classes. - Програмування</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css"
+          rel="stylesheet">
+    <meta content="Lecture n13.2 Classes." name="description">
+
+    <meta content="Lecture n13.2 Classes." property="og:title">
+    <meta content="article" property="og:type">
+    <meta content="Lecture n13.2 Classes." property="og:description">
+
+    <link href="https://www.w3schools.com/favicon.ico" rel="icon" sizes="any">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body class="bg-light">
+<header class="bg-dark text-white py-4 mb-4">
+    <div class="container-fluid">
+        <a class="text-white text-decoration-none" href="index.html"><h1 class="mb-0">Програмування</h1></a>
+    </div>
+</header>
+
+<main class="container-fluid">
+    <div class="row">
+        <aside class="col-lg-3 mb-4">
+            <nav class="card sticky-lg-top">
+                <div class="card-body">
+                    <h5 class="card-title">Зміст</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a class="text-decoration-none" href="lecture-6.html">Функції, параметри,
+                            вказівники</a></li>
+                        <li class="mb-2"><a class="text-decoration-none" href="lecture-7.html">Масиви</a></li>
+                        <li class="mb-2"><a class="text-decoration-none" href="lecture-8.html">Структури,
+                            конструктори</a></li>
+                        <li class="mb-2"><a class="text-decoration-none" href="lecture-9.html">Лінійні списки</a></li>
+                        <li class="mb-2"><a class="text-decoration-none" href="lecture-11.html">Потоки, рекурсія</a>
+                        </li>
+                        <li class="mb-2"><a class="text-decoration-none" href="lecture-13.html">Класи</a></li>
+                        <li class="mb-2"><a class="text-decoration-none" href="lecture-15.html">Обробка помилок</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <article class="col-lg-9">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Lecture n13.2 Classes.</h1>
+                    <h2><strong>1. Клас у C++ як новий тип даних</strong></h2>
+                    <p>Ідея: ти створюєш <strong>свій</strong> тип так само, як int чи double, але в ньому:</p>
+                    <ul>
+                        <li>є <strong>дані</strong> (поля);</li>
+                        <li>є <strong>операції над ними</strong> (методи);</li>
+                        <li>можна задавати <strong>правила використання</strong> (інваріанти, конструктори, деструктор,
+                            оператори).
+                        </li>
+                    </ul>
+                    <p>Приклад: Stock — “тип акційного пакета”. Замість того, щоб всюди таскати 3–4 змінні (назва,
+                        кількість, ціна, сумарна вартість), ти створюєш один об’єкт Stock, який:</p>
+                    <ul>
+                        <li>сам знає, як рахувати total<em>val;</li>
+                        <li>сам не дасть тобі продати більше акцій, ніж у ньому є (якщо так запрограмуєш);</li>
+                        <li>може красиво себе вивести (show()).</li>
+                    </ul>
+                    <p>З погляду ООП:</p>
+                    <ul>
+                        <li><strong>інкапсуляція</strong>: зовнішній код не лізе в поля напряму, а працює через методи;
+                        </li>
+                        <li><strong>інваріанти</strong>: всередині класу підтримується “коректний стан” (наприклад,
+                            shares >= 0, total</em>val = shares <em> share<em>val).</li>
+                    </ul>
+                    <hr>
+                    <h2><strong>2. Клас Stock.</strong></h2>
+                    <p>Спрощено:</p>
+                    <pre><code class="language-cpp">class Stock {
+private:
+    enum { Len = 30 };
+    char company[Len];
+    int shares;
+    double share_val;
+    double total_val;
+    static Stock default_stock;
+    static int Counter;
+    void set_tot() { total_val = shares * share_val; }
+
+public:
+    Stock();                         // default
+    Stock(const char* co,int n,double price);
+    ~Stock();
+    Stock&amp; buy(int num,double price);
+    Stock&amp; sell(int num,double price);
+    void update(double price);
+    void show() const;
+    const Stock&amp; topval(const Stock&amp; s) const;
+    static void set_default(const char*,int,double);
+    static int getCounter() { return Counter; }
+};</code></pre>
+                    <p>Що тут важливо:</p>
+                    <p><strong>Приватні поля</strong></p>
+                    <ul>
+                        <li>company, shares, share</em>val, total<em>val — внутрішній стан.</li>
+                        <li>Зовнішній код не може їх змінити напряму → ти контролюєш будь-які зміни через методи, можеш
+                            перевіряти параметри, не допускати “дурних” значень.
+                        </li>
+                    </ul>
+                    <p><strong>set</em>tot() як приватний метод</strong></p>
+                    <ul>
+                        <li>Це “дрібна внутрішня логіка”, яка повторюється в buy/sell/update.</li>
+                        <li>Ти ховаєш деталі реалізації → якщо завтра формула зміниться, переписуєш в одному місці.</li>
+                    </ul>
+                    <p><strong>Статичні поля</strong></p>
+                    <ul>
+                        <li>static Stock default<em>stock; — один спільний об’єкт для всіх, наприклад, “дефолтний пакет
+                            акцій”.</li>
+                        <li>static int Counter; — лічильник створених об’єктів (інкрементуєш у конструкторах,
+                            декрементуєш в деструкторі).
+                        </li>
+                        <li>Вони існують “поза” конкретним екземпляром, доступ: Stock::Counter.</li>
+                    </ul>
+                    <p><strong>Методи</strong></p>
+                    <ul>
+                        <li>Конструктори задають початковий стан, можуть:</li>
+                    </ul>
+                    - гарантувати, що об’єкт ніколи не буде “незаповнений”;
+                    - збільшити Counter, при необхідності ініціалізувати з default</em>stock.
+                    <ul>
+                        <li>buy(num, price) / sell(num, price):</li>
+                    </ul>
+                    - змінюють shares і share<em>val;
+                    - перевіряють аргументи (не дозволити продати більше, ніж є; не дати від’ємну кількість);
+                    - викликають set</em>tot().
+                    <ul>
+                        <li>update(price) — змінює share<em>val, перераховує total</em>val.</li>
+                        <li>show() const — метод, який обіцяє <strong>не змінювати</strong> об’єкт. Завдяки цьому його
+                            можна викликати для const Stock.
+                        </li>
+                    </ul>
+                    <p><strong>topval</strong></p>
+                    <pre><code class="language-cpp">const Stock&amp; topval(const Stock&amp; s) const {
+    return (s.total_val &gt; total_val) ? s : *this;
+}</code></pre>
+                    <p>Сенс:</p>
+                    <ul>
+                        <li>порівняти два Stock за загальною вартістю;</li>
+                        <li>повернути посилання без копіювання;</li>
+                        <li>const-метод, отже не змінює об’єкт.</li>
+                    </ul>
+                    <p>З погляду ООП: Stock — інкапсульований тип з інваріантами, статичними ресурсами й чітким життєвим
+                        циклом.</p>
+                    <hr>
+                    <h2><strong>3. Оголошення змінних, констант, масивів, вказівників</strong></h2>
+                    <h3><strong>Звичайні змінні / константи</strong></h3>
+                    <pre><code class="language-cpp">Stock sally;                        // виклик Stock()
+Stock rich("Apple",360,125.75);     // виклик Stock(const char*,int,double)
+const Stock land("K",10,105);       // об'єкт, що не змінюється</code></pre>
+                    <p>Концептуально:</p>
+                    <ul>
+                        <li>при вході в область видимості викликається конструктор;</li>
+                        <li>при виході — деструктор (RAII: ресурс прив’язаний до об’єкта).</li>
+                    </ul>
+                    <p>const Stock:</p>
+                    <ul>
+                        <li>ти забороняєш змінювати об’єкт;</li>
+                        <li>можна викликати тільки const-методи (show, topval), що не змінюють стан.</li>
+                    </ul>
+                    <h3><strong>Масиви</strong></h3>
+                    <pre><code class="language-cpp">Stock arr[5];             // 5 об'єктів Stock()
+Stock A[] = {
+    Stock("NanoSmart",12,20.0),
+    Stock("Boffo Objects",200,2.0),
+    ...
+};</code></pre>
+                    <p>Кожен елемент — повноцінний об’єкт зі своїм станом. Можеш писати:</p>
+                    <pre><code class="language-cpp">A[0].buy(10, 21.5);
+A[3].show();</code></pre>
+                    <h3><strong>Вказівники та динамічна пам’ять</strong></h3>
+                    <pre><code class="language-cpp">Stock* p = new Stock("AT&amp;T",25,245);
+p-&gt;show();
+delete p;</code></pre>
+                    <ul>
+                        <li>new викликає конструктор і виділяє пам’ять у heap.</li>
+                        <li>delete викликає деструктор і звільняє пам’ять.</li>
+                        <li>Це потрібне, коли:</li>
+                    </ul>
+                    - розмір або тривалість життя не збігається з областю видимості;
+                    - робиш складні структури (списки, дерева).
+                    <hr>
+                    <h2><strong>4. Клас і функції: передача об’єктів</strong></h2>
+                    <p>Приклад зі слайду:</p>
+                    <pre><code class="language-cpp">bool greater(double a, double b) { return a &gt; b; }
+
+bool greater(const Stock&amp; a, const Stock&amp; b) {
+    return a.total() &gt; b.total();
+}</code></pre>
+                    <p>Головні моменти:</p>
+                    <ul>
+                        <li><strong>передача по const-посиланню</strong>:</li>
+                    </ul>
+                    - не копіює об’єкт;
+                    - гарантує, що ти його не зміниш;
+                    <ul>
+                        <li>функція працює з <strong>інтерфейсом</strong>, а не з полями напряму (через метод total()
+                            або topval).
+                        </li>
+                    </ul>
+                    <p>Функція showStocks:</p>
+                    <pre><code class="language-cpp">void showStocks(Stock A[], int size) {
+    cout &lt;&lt; "\nSTOCK HOLDINGS:\n\n";
+    for (int i = 0; i &lt; size; ++i) {
+        cout &lt;&lt; '#' &lt;&lt; i &lt;&lt; '\n';
+        A[i].show();
+    }
+}</code></pre>
+                    <p>Це приклад “звичайної” функції, яка працює з масивом об’єктів через їх публічний інтерфейс.</p>
+                    <p>З точки зору ООП:</p>
+                    <ul>
+                        <li>клас визначає “модель” і поведінку;</li>
+                        <li>зовнішні функції використовують її як чорну скриньку, не знаючи внутрішньої реалізації.</li>
+                    </ul>
+                    <hr>
+                    <h2><strong>5. Додаткові послуги класу</strong></h2>
+                    <p>Тут про:</p>
+                    <ul>
+                        <li><strong>вкладені типи</strong> (enum { Len = 30 }; всередині класу):</li>
+                    </ul>
+                    - назва видно як Stock::Len;
+                    - це частина “контракту” класу, не глобальний символ.
+                    <ul>
+                        <li><strong>статичні поля</strong>:</li>
+                    </ul>
+                    - спільні ресурси (лічильники, кеші, настройки за замовчуванням);
+                    <ul>
+                        <li><strong>статичні методи</strong>:</li>
+                    </ul>
+                    - не прив’язані до конкретного об’єкта;
+                    - можуть керувати статичними полями (getCounter, set_default).
+                    <p>Це дозволяє класу бути не просто “збіркою полів”, а <strong>повноцінним сервісом</strong> навколо
+                        певної концепції (акції, час, матриця тощо).</p>
+                    <hr>
+                    <h2><strong>6. Перевантаження операторів глибше</strong></h2>
+                    <p>Мотивація: хочемо працювати з об’єктами так само природно, як з числами:</p>
+                    <pre><code class="language-cpp">Time a(1, 20), b(3, 45);
+Time c = a + b;      // замість a.add(b)
+if (a &lt; b) ...
+cout &lt;&lt; a;           // вивід у потік</code></pre>
+                    <p>Правила зі слайду:</p>
+                    <ol>
+                        <li>Можна перевантажити тільки стандартні оператори (+ - </em> / << >> [] () тощо).</li>
+                        <li>Хоча б один операнд — користувацький тип (щоб не ламати поведінку для built-in).</li>
+                        <li>Пріоритет і асоціативність не змінюються.</li>
+                        <li>Не можна вигадати новий оператор.</li>
+                        <li>Не перевантажують ::, ., .<em>, ?: і більшість каст-операторів.</li>
+                        <li>Оператори = () [] -> перевантажують тільки як методи класу (бо вони логічно “прив’язані” до
+                            лівого операнда).
+                        </li>
+                    </ol>
+                    <p>З погляду дизайну:</p>
+                    <ul>
+                        <li>оператор має поводитись очікувано: + — асоціативна “додаткова” операція, не робити там дивні
+                            сайд-ефекти;
+                        </li>
+                        <li><strong>симетричні оператори</strong> (a+b) часто краще реалізовувати як вільні (зовнішні)
+                            функції, щоб працювали обидва порядки операндів (Matrix + Matrix, Vector + Vector).
+                        </li>
+                    </ul>
+                    <hr>
+                    <h2><strong>7. Зовнішній оператор+ для класу Time</strong></h2>
+                    <p>Фрагмент зі слайду:</p>
+                    <pre><code class="language-cpp">class Time {
+private:
+    int hours, minutes;
+public:
+    Time();
+    Time(int h, int m);
+    int hour() const { return hours; }
+    int min() const  { return minutes; }
+    void show(std::ostream&amp;) const;
+};
+
+Time operator+(const Time&amp; a, const Time&amp; b) {
+    int m = a.min() + b.min();
+    int h = a.hour() + b.hour() + m / 60;
+    m %= 60;
+    return Time(h, m);
+}</code></pre>
+                    <p>Логіка:</p>
+                    <ul>
+                        <li>Оператор + реалізований як окрема функція → не прив’язаний до того, хто “зліва”;</li>
+                        <li>Використовує <strong>публічні</strong> методи hour() і min() → не порушує інкапсуляцію;</li>
+                        <li>Алгоритм:</li>
+                    </ul>
+                    - додаємо хвилини;
+                    - частину хвилин, що ≥ 60, переносимо в години;
+                    - повертаємо новий Time, не змінюючи аргументи (оператор “чистий”).
+                    <p>Це “правильний” OO-стиль: зовнішній код бачить тільки інтерфейс класу, а не поля.</p>
+                    <hr>
+                    <h2><strong>8. Дружня функція-оператор для Time</strong></h2>
+                    <p>Варіант зі friend:</p>
+                    <pre><code class="language-cpp">class Time {
+private:
+    int hours, minutes;
+public:
+    Time();
+    Time(int h, int m);
+    void show(std::ostream&amp;) const;
+    friend Time operator+(const Time&amp; a, const Time&amp; b);
+};
+
+Time operator+(const Time&amp; a, const Time&amp; b) {
+    int m = a.minutes + b.minutes; // доступ до private
+    int h = a.hours + b.hours + m / 60;
+    m %= 60;
+    return Time(h, m);
+}</code></pre>
+                    <p>Чим відрізняється:</p>
+                    <ul>
+                        <li>operator+ тепер має <strong>повний доступ</strong> до приватних полів, бо оголошений як
+                            friend;
+                        </li>
+                        <li>не треба писати гетери hour()/min();</li>
+                        <li>але ти трохи послаблюєш інкапсуляцію (зовнішня функція знає внутрішні деталі).</li>
+                    </ul>
+                    <p>Коли friend виправданий:</p>
+                    <ul>
+                        <li>коли функція логічно належить класу, але не має бути методом (симетричні оператори:
+                            operator+, operator== для двох об’єктів);
+                        </li>
+                        <li>коли ти хочеш ефективності / простоти і не хочеш десятки дрібних гетерів.</li>
+                    </ul>
+                    <p>Головне: не робити friend “за замовчуванням”, а тільки там, де справді потрібно.</p>
+                    <hr>
+                    <h2><strong>9. ООП-погляд загалом</strong></h2>
+                    <p>Якщо стиснути все, що на цих слайдах, до кількох ідей:</p>
+                    <ol>
+                        <li><strong>Моделювання домену</strong></li>
+                    </ol>
+
+                    Stock, Time — це не просто дані, а “малі моделі реальних сутностей”. Ти задаєш:
+
+                    - які поля потрібні;
+                    - які операції дозволені;
+                    - які стани припустимі / заборонені.
+                    <ol>
+                        <li><strong>Інкапсуляція та інтерфейс</strong></li>
+                    </ol>
+
+                    Зовнішній код працює з:
+
+                    - конструкторами;
+                    - методами (buy, sell, show, topval);
+                    - операторами (operator+).
+
+                    Він <strong>не</strong> знає, як це реалізовано всередині — і це добре.
+
+                    <ol>
+                        <li><strong>Життєвий цикл і RAII</strong></li>
+                    </ol>
+
+                    Конструктори/деструктори + статичні поля → ти повністю контролюєш:
+
+                    - коли і як об’єкт ініціалізується;
+                    - що з ним відбувається при видаленні;
+                    - скільки всього об’єктів створено (Counter).
+                    <ol>
+                        <li><strong>Перевантаження операторів</strong></li>
+                    </ol>
+
+                    Робить API “нативним”:
+
+                    - a + b замість add(a,b);
+                    - cout << obj замість obj.print(cout);
+
+                    При цьому важливо зберігати очікувану семантику.
+
+                    <ol>
+                        <li><strong>Статика і friend</strong></li>
+                    </ol>
+                    - статика — “спільна пам’ять”/поведінка для всіх екземплярів типу;
+                    - friend — “контрольований обхід” інкапсуляції, який варто використовувати обережно.
+                    <h1><strong>1. Метод-оператор усередині класу (оператор+)</strong></h1>
+                    <h3><strong>Що це?</strong></h3>
+                    <p>Перевантаження оператора + <strong>як методу-члена класу</strong>.</p>
+                    <h3><strong>Навіщо?</strong></h3>
+                    <p>Щоб можна було писати:</p>
+                    <pre><code class="language-cpp">Time A(1,20), B(3,45);
+Time C = A + B;</code></pre>
+                    <p>І щоб це працювало так само природно, як додавання чисел.</p>
+                    <h3><strong>Як працює?</strong></h3>
+                    <pre><code class="language-cpp">Time Time::operator+(const Time&amp; b) const {
+    int m = minutes + b.minutes;
+    int h = hours + b.hours + m/60;
+    m %= 60;
+    return Time(h, m);
+}</code></pre>
+                    <ul>
+                        <li><strong>ця функція викликається для об’єкта зліва від +</strong>:</li>
+                    </ul>
+
+                    A.operator+(B)
+
+                    <ul>
+                        <li>const після методу гарантує, що А і В не зміняться.</li>
+                        <li>Повертається <strong>новий об’єкт</strong> — це важливо (операції з Time не мають змінювати
+                            операнди).
+                        </li>
+                    </ul>
+                    <h3><strong>Важливо з ООП-точки зору</strong></h3>
+                    <ul>
+                        <li>Метод має доступ до приватних полів (hours, minutes).</li>
+                        <li>Перевантаження операцій — це спосіб <strong>зробити клас природним у використанні</strong>,
+                            як вбудовані типи.
+                        </li>
+                    </ul>
+                    <hr>
+                    <h1><strong>2. Перевантаження операторів через звичайну функцію (operator<<)</strong></h1>
+                    <h3><strong>Що це?</strong></h3>
+                    <p>Тут оператор << не може бути методом класу, бо у виразі:</p>
+                    <pre><code class="language-cpp">cout &lt;&lt; A;</code></pre>
+                    <p>— <strong>зліва знаходиться cout</strong>, який не є об’єктом Time.</p>
+                    <p>Тому operator<< повинен бути <strong>вільною функцією</strong>.</p>
+                    <h3><strong>Як працює?</strong></h3>
+                    <pre><code class="language-cpp">ostream&amp; operator&lt;&lt;(ostream&amp; os, const Time&amp; t) {
+    t.show(os);
+    return os;
+}</code></pre>
+                    <ul>
+                        <li>Першим параметром приймає потік.</li>
+                        <li>Повертає потік, щоб операції ланцюжились (cout << A << B).</li>
+                    </ul>
+                    <h3><strong>Навіщо?</strong></h3>
+                    <p>Це дає можливість красиво друкувати об’єкти:</p>
+                    <pre><code class="language-cpp">cout &lt;&lt; A;</code></pre>
+                    <hr>
+                    <h1><strong>3. Множення Time на число (operator)</strong></h1>
+                    <h3><strong>Що це?</strong></h3>
+                    <p>Перевантаження оператора множення, щоб:</p>
+                    <pre><code class="language-cpp">Time study(1,20);
+Time total = study * 3;</code></pre>
+                    <h3><strong>Як працює метод-член?</strong></h3>
+                    <pre><code class="language-cpp">Time Time::operator*(double n) const {
+    long long totalmin = (hours*60 + minutes) * n;
+    return Time(totalmin/60, totalmin%60);
+}</code></pre>
+                    <h3><strong>А як зробити 2 </em> Time?</strong></h3>
+                    <p>Тут Time стоїть <strong>справа</strong>, тому метод не спрацює.</p>
+                    <p>Потрібна <strong>зовнішня функція</strong>:</p>
+                    <pre><code class="language-cpp">Time operator*(double n, const Time&amp; t) {
+    return t * n;
+}</code></pre>
+                    <h3><strong>Важливий принцип</strong></h3>
+                    <p>«Якщо оператор має працювати симетрично — іноді потрібна зовнішня функція».</p>
+                    <hr>
+                    <h1><strong>4. Перетворення типів (конструктор + operator int())</strong></h1>
+                    <h3><strong>Проблема</strong></h3>
+                    <p>Хочемо робити:</p>
+                    <pre><code class="language-cpp">Time A(1,20);
+Time B = A + 300;   // 300 хвилин
+int x = B;          // перетворити Time → хвилини</code></pre>
+                    <h3><strong>Рішення:</strong></h3>
+                    <ol>
+                        <li><strong>explicit конструктор</strong> перетворює int → Time:</li>
+                    </ol>
+                    <pre><code class="language-cpp">explicit Time(int t) { hours = t/60; minutes = t%60; }</code></pre>
+                    <ol>
+                        <li><strong>operator int()</strong> перетворює Time → int:</li>
+                    </ol>
+                    <pre><code class="language-cpp">operator int() const { return hours*60 + minutes; }</code></pre>
+                    <h3><strong>Чому explicit?</strong></h3>
+                    <p>Щоб уникнути небезпечних неявних перетворень:</p>
+                    <pre><code class="language-cpp">Time A = 5; // забороняємо таке</code></pre>
+                    <hr>
+                    <h1><strong>5. Автоматично згенеровані члени класу</strong></h1>
+                    <p>C++ сам генерує:</p>
+                    <ul>
+                        <li>конструктор за замовчуванням</li>
+                        <li>конструктор копіювання</li>
+                        <li>оператор присвоєння</li>
+                        <li>деструктор</li>
+                        <li>оператор адресування (&)</li>
+                    </ul>
+                    <p><strong>Але тільки якщо ти не оголосив жодного зі своїх конструкторів.</strong></p>
+                    <h3><strong>Чому це важливо?</strong></h3>
+                    <p>Бо ці автоматичні реалізації працюють тільки для класів без динамічної пам’яті.</p>
+                    <hr>
+                    <h1><strong>6. Конструктор копіювання</strong></h1>
+                    <h3><strong>Що це?</strong></h3>
+                    <p>Коли ти створюєш новий об’єкт зі старого:</p>
+                    <pre><code class="language-cpp">Time B = A;
+Time C(A);</code></pre>
+                    <p>Генерується <strong>копія даних</strong>.</p>
+                    <h3><strong>Для Time вистачає “поверхневої копії”</strong></h3>
+                    <h3><strong>, бо в ньому тільки int.</strong></h3>
+                    <hr>
+                    <h1><strong>7. Оператор копіювального присвоєння</strong></h1>
+                    <h3><strong>Що це?</strong></h3>
+                    <p>Викликається при:</p>
+                    <pre><code class="language-cpp">A = B;</code></pre>
+                    <h3><strong>Правильна форма:</strong></h3>
+                    <pre><code class="language-cpp">Time&amp; Time::operator=(const Time&amp; t) {
+    if (this != &amp;t) {
+        hours = t.hours;
+        minutes = t.minutes;
+    }
+    return *this;
+}</code></pre>
+                    <h3><strong>Головне правило</strong></h3>
+                    <p><strong>Завжди перевірка на самоприсвоєння</strong>.</p>
+                    <hr>
+                    <h1><strong>8. Коли треба власні копіювання/присвоєння?</strong></h1>
+                    <h3><strong>Правило 3-х (Rule of Three)</strong></h3>
+                    <p>Якщо в класі є динамічна пам’ять (new, new[]):</p>
+                    <ol>
+                        <li><strong>треба оголосити конструктор копіювання</strong></li>
+                        <li><strong>треба оголосити оператор присвоєння</strong></li>
+                        <li><strong>треба оголосити деструктор</strong></li>
+                    </ol>
+                    <p>Інакше будуть витоки, подвійні delete, креші.</p>
+                    <hr>
+                    <h1><strong>9. Клас StringBad — приклад неправильного управління пам’яттю</strong></h1>
+                    <h3><strong>Проблема</strong></h3>
+                    <p>Конструктор виділяє пам’ять:</p>
+                    <pre><code class="language-cpp">str = new char[len+1];</code></pre>
+                    <p>А копіювання за замовчуванням копіює лише <strong>вказівник</strong>, а не рядок.</p>
+                    <p>=> два об’єкти вказують на одну й ту ж пам’ять</p>
+                    <p>=> подвійний delete → UB, креш.</p>
+                    <hr>
+                    <h1><strong>10. Виправлений варіант (глибока копія)</strong></h1>
+                    <h3><strong>Коректний конструктор копіювання</strong></h3>
+                    <pre><code class="language-csharp">StringBad::StringBad(const StringBad&amp; st) {
+    len = st.len;
+    str = new char[len + 1];
+    strcpy(str, st.str);
+}</code></pre>
+                    <h3><strong>Коректний оператор присвоєння</strong></h3>
+                    <pre><code class="language-cpp">StringBad&amp; StringBad::operator=(const StringBad&amp; st) {
+    if (this == &amp;st) return *this;
+
+    delete[] str;
+    len = st.len;
+    str = new char[len + 1];
+    strcpy(str, st.str);
+
+    return *this;
+}</code></pre>
+                    <h3><strong>Навіщо це все?</strong></h3>
+                    <p>Щоб кожен об’єкт мав свою <strong>копію пам’яті</strong>, а не ділитись одним буфером.</p>
+                    <hr>
+                    <h1><strong>11. Чому це важливо для ООП?</strong></h1>
+                    <p>Це дозволяє:</p>
+                    <ul>
+                        <li>контролювати життєвий цикл об’єкта</li>
+                        <li>робити класи безпечними</li>
+                        <li>недопустити витоків пам’яті</li>
+                        <li>робити класи, які поводяться як типи мови (int, string)</li>
+                    </ul>
+                    <p>Перевантаження операторів робить API <strong>природним</strong>, а правильна робота з пам’яттю —
+                        <strong>безпечним</strong>.</p>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+        <p class="mb-0">Золотарьов Тимофій. 2025 Конспект лекцій з програмування.</p>
+    </div>
+</footer>
+</body>
+
+</html>

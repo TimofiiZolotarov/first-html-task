@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>**Рекурсивні функції** - Програмування</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+  <meta name="description" content="**Рекурсивні функції**">
+
+  <meta property="og:title" content="**Рекурсивні функції**">
+  <meta property="og:type" content="article">
+  <meta property="og:description" content="**Рекурсивні функції**">
+
+  <link rel="icon" href="https://www.w3schools.com/favicon.ico" sizes="any">
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body class="bg-light">
+  <header class="bg-dark text-white py-4 mb-4">
+    <div class="container-fluid">
+      <a href="index.html" class="text-white text-decoration-none"><h1 class="mb-0">Програмування</h1></a>
+    </div>
+  </header>
+
+  <main class="container-fluid">
+    <div class="row">
+      <aside class="col-lg-3 mb-4">
+        <nav class="card sticky-lg-top">
+          <div class="card-body">
+            <h5 class="card-title">Зміст</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="lecture-6.html" class="text-decoration-none">Функції, параметри, вказівники</a></li>
+              <li class="mb-2"><a href="lecture-7.html" class="text-decoration-none">Масиви</a></li>
+              <li class="mb-2"><a href="lecture-8.html" class="text-decoration-none">Структури, конструктори</a></li>
+              <li class="mb-2"><a href="lecture-9.html" class="text-decoration-none">Лінійні списки</a></li>
+              <li class="mb-2"><a href="lecture-11.html" class="text-decoration-none">Потоки, рекурсія</a></li>
+              <li class="mb-2"><a href="lecture-13.html" class="text-decoration-none">Класи</a></li>
+              <li class="mb-2"><a href="lecture-15.html" class="text-decoration-none">Обробка помилок</a></li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+
+      <article class="col-lg-9">
+        <div class="card">
+          <div class="card-body">
+            <p>Lecture n7.  Arrays.</p>
+<h2>Постановка задачі</h2>
+<p>Задані три $n$ -елементні масиви дійсних чисел: $a$, $b$, $c$ (у прикладі $n=10$). Обчислити величину</p>
+<p>де $(x,y)$ — скалярний добуток (dot product) двох векторів однакової довжини:</p>
+<p>$u = \begin{cases}
+(a,c), & \text{якщо }(a,a) > 5, \\
+(b,c), & \text{інакше.}
+\end{cases}$</p>
+<h2>Алгоритм</h2>
+<ol>
+<li>Прочитати $n$ та елементи масивів $a$, $b$, $c$.</li>
+<li>Обчислити $s = (a,a)$ — квадрат довжини вектора $a$ (сума квадратів його елементів).</li>
+<li>Якщо $s > 5$, тоді $u = (a,c)$, інакше $u = (b,c)$.</li>
+<li>Вивести $u$.</li>
+</ol>
+<p>$(x,y) = \sum\limits<em>{i=0}^{n-1} x</em>i y<em>i.$</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+double dot(const vector&lt;double&gt;&amp; x, const vector&lt;double&gt;&amp; y) {
+    double s = 0.0;
+    for (size_t i = 0; i &lt; x.size(); ++i) s += x[i] * y[i];
+    return s;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    const int n = 10;                // фіксована довжина із задачі
+    vector&lt;double&gt; a(n), b(n), c(n);
+
+    // Ввід даних
+    for (int i = 0; i &lt; n; ++i) cin &gt;&gt; a[i];
+    for (int i = 0; i &lt; n; ++i) cin &gt;&gt; b[i];
+    for (int i = 0; i &lt; n; ++i) cin &gt;&gt; c[i];
+
+    // Обчислення
+    double aa = dot(a, a);
+    double u = (aa &gt; 5.0) ? dot(a, c) : dot(b, c);
+
+    cout.setf(ios::fixed);
+    cout &lt;&lt; setprecision(6) &lt;&lt; u &lt;&lt; "\n";
+    return 0;
+}</code></pre>
+<h3>Пояснення ключових кроків</h3>
+<ul>
+<li><strong><code>dot(a,a)</code></strong> — це сума квадратів елементів $a$, тобто $\lVert a \rVert^2$.</li>
+<li><strong>Тернарний оператор</strong> <code>(умова ? X : Y)</code> стисло обирає, який скалярний добуток рахувати.</li>
+<li><strong><code>setprecision(6)</code></strong> — друк з 6 знаками після коми (за потреби змініть).</li>
+</ul>
+<h2>Типові помилки</h2>
+<ul>
+<li>Невірні індекси або довжини масивів (переплутати $n$).</li>
+<li>Спроба рахувати скалярний добуток масивів різної довжини.</li>
+<li>Забути обнулити акумулятор $s$/<code>u</code> перед сумуванням.</li>
+<li>Порівнювати з <code>5</code> для типу <code>double</code> — це нормально в даній задачі; для близьких значень інколи вводять епсілон: <code>if (a > 5.0 + 1e-9)</code>.</li>
+</ul>
+<h3>Файл ArrProcedures.h</h3>
+<pre><code class="language-cpp">#ifndef _Array_Procs_
+#define _Array_Procs_
+
+using num_type = double;
+const size_t N = 10;
+using Array = num_type[N];
+
+void ReadArray(Array a);
+num_type ScalarProduct(Array a, Array b);
+
+#endif</code></pre>
+<ul>
+<li>Використано <strong>захисні директиви</strong> #ifndef, #define, #endif — вони не дозволяють підключити один і той самий файл кілька разів.</li>
+<li>Визначено <strong>типи</strong>:</li>
+</ul>
+    - num</em>type — псевдонім для double, що дозволяє легко змінити тип даних (наприклад, на float).
+    - Array — масив із N елементів типу num<em>type.
+<ul>
+<li>Задано <strong>константу</strong> N = 10.</li>
+<li>Оголошено <strong>функції</strong>, але без реалізації:</li>
+</ul>
+    - ReadArray(Array a) — для введення масиву з клавіатури.
+    - ScalarProduct(Array a, Array b) — для обчислення скалярного добутку двох масивів.
+<h3><strong>Файл ArrProcedures.cpp</strong></h3>
+<p>Цей файл містить <strong>реалізацію функцій</strong>, які були <strong>оголошені</strong> в ArrProcedures.h.</p>
+<h3><strong>#include <iostream> і #include "ArrProcedures.h"</strong></h3>
+<pre><code class="language-cpp">void ReadArray(Array a)
+{
+    std::cout &lt;&lt; "Input " &lt;&lt; N &lt;&lt; " values: ";
+    for (size_t i = 0; i &lt; N; ++i) std::cin &gt;&gt; a[i];
+    std::cin.get();
+}</code></pre>
+<ul>
+<li><iostream> — для введення та виведення (std::cin, std::cout).</li>
+<li>"ArrProcedures.h" — підключає заголовковий файл із визначеннями типів (Array, num</em>type, N).</li>
+</ul>
+<hr>
+<h3><strong>2. Функція ReadArray(Array a)</strong></h3>
+<p><strong>Призначення:</strong></p>
+<p>Зчитує <strong>N</strong> елементів масиву з клавіатури.</p>
+<p><strong>Ключові моменти:</strong></p>
+<ul>
+<li>for — послідовно зчитує всі елементи масиву.</li>
+<li>std::cin.get() — чекає натискання Enter після введення.</li>
+<li>Функція не повертає значення, бо змінює масив через посилання.</li>
+</ul>
+<hr>
+<h3><strong>3. Функція ScalarProduct(Array a, Array b)</strong></h3>
+<pre><code class="language-cpp">num_type ScalarProduct(Array a, Array b)
+{
+    num_type s = 0;
+    for (size_t i = 0; i &lt; N; ++i) s += a[i] * b[i];
+    return s;
+}</code></pre>
+<p><strong>Призначення:</strong></p>
+<p>Обчислює <strong>скалярний добуток</strong> двох масивів a і b.</p>
+<p><strong>Алгоритм:</strong></p>
+<ol>
+<li>Ініціалізує змінну s = 0.</li>
+<li>Послідовно додає до s добутки відповідних елементів a[i] <em> b[i].</li>
+<li>Повертає результат.</li>
+</ol>
+<hr>
+<h3><strong>Підсумок</strong></h3>
+<ul>
+<li>ReadArray — вводить дані для масиву.</li>
+<li>ScalarProduct — обчислює скалярний добуток двох масивів.</li>
+<li>Разом із ArrProcedures.h ці функції утворюють <strong>окремий модуль</strong>, що полегшує повторне використання коду та підтримку проекту.</li>
+</ul>
+<hr>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include "ArrProcedures.h"
+
+int main()
+{
+    Array A, B, C;
+    cout &lt;&lt; "Vector a\n"; ReadArray(A);
+    cout &lt;&lt; "Vector b\n"; ReadArray(B);
+    cout &lt;&lt; "Vector c\n"; ReadArray(C);
+
+    num_type u = (ScalarProduct(A, A) &gt; 5) ?
+                 ScalarProduct(A, C) :
+                 ScalarProduct(B, C);
+
+    cout &lt;&lt; "U = " &lt;&lt; u &lt;&lt; '\n';
+    return 0;
+}</code></pre>
+<hr>
+<h3><strong>Файл Program.cpp</strong></h3>
+<p>Це <strong>основна програма</strong>, яка використовує функції з модулів ArrProcedures.h і ArrProcedures.cpp.</p>
+<h3><strong>Основні етапи роботи:</strong></h3>
+<ol>
+<li><strong>Оголошення трьох масивів</strong> A, B, C типу Array.</li>
+<li><strong>Введення даних</strong> для кожного масиву через функцію ReadArray().</li>
+<li><strong>Обчислення результату u:</strong></li>
+</ol>
+    - Якщо скалярний добуток (A, A) > 5 → обчислюється (A, C);
+    - Інакше → обчислюється (B, C).
+<ol>
+<li><strong>Виведення результату</strong> на екран.</li>
+</ol>
+<h3><strong>Призначення коду:</strong></h3>
+<p>Ця програма демонструє <strong>структурований підхід</strong> — поділ коду на модулі:</p>
+<ul>
+<li>ArrProcedures.h — оголошення типів і функцій,</li>
+<li>ArrProcedures.cpp — реалізація функцій,</li>
+<li>Program.cpp — основна логіка програми.</li>
+</ul>
+<p>Таким чином, проєкт легко підтримувати й розширювати, змінюючи окремі частини незалежно.</p>
+<hr>
+<h3><strong>Функція для масиву довільного розміру</strong></h3>
+<h3><strong>1. Розмір масиву — частина типу параметра</strong></h3>
+<pre><code class="language-cpp">// const int N = 10;
+void ReadArray(double a[N])
+{
+    std::cout &lt;&lt; "Input " &lt;&lt; N &lt;&lt; " values: ";
+    for (size_t i = 0; i &lt; N; ++i) std::cin &gt;&gt; a[i];
+    std::cin.get();
+}</code></pre>
+<p><strong>Особливість:</strong></p>
+<p>Розмір масиву N зафіксовано — він є частиною типу параметра.</p>
+<p>Тобто функція працює лише з масивами <strong>одного розміру</strong>.</p>
+<hr>
+<h3><strong>2. Розмір задано параметром</strong></h3>
+<pre><code class="language-cpp">void ReadArray(double* a, size_t n)
+{
+    std::cout &lt;&lt; "Input " &lt;&lt; n &lt;&lt; " values: ";
+    for (size_t i = 0; i &lt; n; ++i) std::cin &gt;&gt; a[i];
+    std::cin.get();
+}</code></pre>
+<p><strong>Особливість:</strong></p>
+<p>Тут функція приймає <strong>вказівник на масив</strong> і <strong>його розмір</strong>, що дозволяє працювати з <strong>масивами будь-якої довжини</strong>.</p>
+<hr>
+<h3><strong>Пояснення</strong></h3>
+<ul>
+<li><strong>Перевантаження функцій:</strong></li>
+</ul>
+<p>Обидві версії мають однакову назву ReadArray, але різні параметри.</p>
+<p>Програма автоматично обирає відповідну залежно від виклику.</p>
+<ul>
+<li><strong>Гнучкість:</strong></li>
+</ul>
+<p>Друга версія універсальніша — її можна використовувати для будь-якого розміру масиву, навіть якщо N невідоме наперед.</p>
+<hr>
+<h3><strong>Висновок</strong></h3>
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th><strong>Версія</strong></th>
+      <th><strong>Головна риса</strong></th>
+      <th><strong>Використання</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>void ReadArray(double a[N])</td>
+      <td>Фіксований розмір</td>
+      <td>Коли N стало відоме (наприклад, 10)</td>
+    </tr>
+    <tr>
+      <td>void ReadArray(double* a, size_t n)</td>
+      <td>Гнучкий розмір</td>
+      <td>Коли масив передається з довжиною як параметр</td>
+    </tr>
+  </tbody>
+</table>
+<h3><strong>Функція може викликати функцію. Обчислення скалярного добутку векторів</strong></h3>
+<pre><code class="language-cpp">double ScalarProduct(const double* a, const double* b, size_t n)
+{
+    double s = 0;
+    for (size_t i = 0; i &lt; n; ++i) s += a[i] * b[i];
+    return s;
+}</code></pre>
+<p><strong>Призначення:</strong></p>
+<p>Обчислює скалярний добуток двох векторів довжини n.</p>
+<p>Результат — сума добутків відповідних елементів.</p>
+<hr>
+<h3><strong>Обчислення норми вектора</strong></h3>
+<pre><code class="language-cpp">double Norm(const double a[], size_t n)
+{
+    return sqrt(ScalarProduct(a, a, n));
+}</code></pre>
+<p><strong>Призначення:</strong></p>
+<p>Функція обчислює довжину (норму) вектора:</p>
+<p>$||a|| = \sqrt{(a,a)}$</p>
+<p>Тут використовується інша функція ScalarProduct, що показує:</p>
+<blockquote>Функції можуть викликати одна одну для повторного використання коду.</blockquote>
+>
+<h3><strong>Ключові ідеї</strong></h3>
+<ul>
+<li>Використано вказівники та параметр n, тому функції універсальні для масивів будь-якої довжини.</li>
+<li>const означає, що масиви не змінюються всередині функції.</li>
+<li>Такий підхід забезпечує повторне використання:</li>
+</ul>
+<p>Norm() не дублює код, а використовує готову функцію ScalarProduct().</p>
+<hr>
+<h3><strong>Складніші випадки оголошення параметрів. Створення динамічного масиву</strong></h3>
+<pre><code class="language-cpp">double* CreateArray(size_t n, double x = 0)
+{
+    double* a = new double[n];      // виділення пам’яті
+    for (size_t i = 0; i &lt; n; ++i)  // заповнення початковими значеннями
+        a[i] = x;
+    return a;                       // повернення вказівника на масив
+}</code></pre>
+<p><strong>Пояснення:</strong></p>
+<ul>
+<li>Функція створює <strong>динамічний масив розміру n</strong>.</li>
+<li>Аргумент x має <strong>значення за замовчуванням</strong> — усі елементи ініціалізуються цим значенням.</li>
+<li>Користувач сам має <strong>звільнити пам’ять</strong> після використання (delete[]).</li>
+</ul>
+<hr>
+<h3><strong>Звільнення пам’яті</strong></h3>
+<pre><code class="language-cpp">void EraseArray(double*&amp; a)
+{
+    delete[] a;
+    a = nullptr;
+}</code></pre>
+<p><strong>Пояснення:</strong></p>
+<ul>
+<li>a передається <strong>як посилання на вказівник</strong>, тому функція може змінити сам вказівник.</li>
+<li>delete[] a звільняє пам’ять.</li>
+<li>a = nullptr; запобігає повторному використанню видаленого масиву.</li>
+</ul>
+<h3><strong>Ключові ідеї</strong></h3>
+<ul>
+<li><strong>Динамічний масив</strong> створюється в області heap за допомогою new.</li>
+<li><strong>Параметри за замовчуванням</strong> (x = 0) спрощують виклик функції.</li>
+<li><strong>Посилання на вказівник (double<em>&)</strong> потрібне, щоб обнулити його після видалення пам’яті.</li>
+<li>Користувач зобов’язаний викликати EraseArray() після CreateArray(), інакше виникне <strong>витік пам’яті</strong>.</li>
+</ul>
+<h3><strong>І знову шукаємо найбільшогo. Функція для знаходження найбільшого значення в масиві</strong></h3>
+<pre><code class="language-cpp">double maxVal(const double* a, size_t n)
+{
+    double result = a[0];
+    for (size_t i = 1; i &lt; n; ++i)
+        if (a[i] &gt; result) result = a[i];
+    return result;
+}</code></pre>
+<p><strong>Пояснення:</strong></p>
+<ul>
+<li>Приймає вказівник на масив і його розмір.</li>
+<li>Порівнює всі елементи та повертає найбільше значення.</li>
+<li>Масив не змінюється, бо переданий як const double</em>.</li>
+</ul>
+<hr>
+<h3><strong>Приклад використання</strong></h3>
+<pre><code class="language-cpp">double d[] = {1, -2, 0, 5, 7, 3, 6, -4, 2, 5};
+size_t k = sizeof(d) / sizeof(d[0]);
+cout &lt;&lt; "max value is " &lt;&lt; maxVal(d, k) &lt;&lt; '\n';</code></pre>
+<p><strong>Пояснення:</strong></p>
+<ul>
+<li>sizeof(d) / sizeof(d[0]) визначає кількість елементів у масиві.</li>
+<li>Програма виводить найбільше число з масиву.</li>
+</ul>
+<hr>
+<h3><strong>Неочікувана відповідь. Порівняння двох половин масиву</strong></h3>
+<pre><code class="language-cpp">if (maxVal(d, k / 2) &gt; maxVal(&amp;d[k / 2], k - k / 2))
+    cout &lt;&lt; "Max is situated at the first half of the array\n";
+else
+    cout &lt;&lt; "Max is situated at the second half of the array\n";</code></pre>
+<p><strong>Проблема:</strong></p>
+<blockquote>Використання &d[k / 2] — неочікуване, оскільки це <strong>вказівник на елемент</strong>, а не вираз, що обчислює адресу правильно (можливе непорозуміння з типами).</blockquote>
+>
+<hr>
+<h3><strong>Правильний варіант</strong></h3>
+<pre><code class="language-cpp">if (maxVal(d, k / 2) &gt; maxVal(d + k / 2, k - k / 2))
+    cout &lt;&lt; "Max is situated at the first half of the array\n";
+else
+    cout &lt;&lt; "Max is situated at the second half of the array\n";</code></pre>
+<p><strong>Пояснення:</strong></p>
+<ul>
+<li>d + k / 2 — це <strong>вказівник на середину масиву</strong>, тобто початок другої половини.</li>
+<li>Використання арифметики вказівників (d + offset) є коректним і безпечним способом передати частину масиву у функцію.</li>
+</ul>
+<h3><strong>Висновок</strong></h3>
+<ul>
+<li>Для пошуку максимуму в різних частинах масиву можна передавати <strong>вказівники на піддіапазони</strong>.</li>
+<li>Вираз d + k / 2 зручніший і типовий у С++, ніж &d[k / 2].</li>
+<li>Такий підхід — основа <strong>роботи з діапазонами</strong> в алгоритмах стандартної бібліотеки STL.</li>
+</ul>
+<hr>
+<h3><strong>Масив – інтервал пам’яті [start; end). Пошук найбільшого елемента у вказаному діапазоні</strong></h3>
+<pre><code class="language-cpp">double* max(double* start, double* end)
+{
+    double* pos = start++;
+    while (start != end)
+    {
+        if (*start &gt; *pos) pos = start;
+        ++start;
+    }
+    return pos;
+}</code></pre>
+<p><strong>Пояснення:</strong></p>
+<ul>
+<li>Функція приймає <strong>вказівники на початок і кінець масиву</strong> (start, end).</li>
+<li>Використовується <strong>ітерація по пам’яті</strong> замість індексів. (<strong>не використовують індекси</strong> (a[i]), а замість цього <strong>пересуваються по вказівниках</strong>, тобто напряму по ділянках пам’яті, де зберігаються елементи масиву.)</li>
+<li>Змінна pos зберігає адресу найбільшого елемента.</li>
+<li>Повертається <strong>вказівник на максимум</strong>, а не саме значення.</li>
+</ul>
+<hr>
+<h3><strong>Приклад використання</strong></h3>
+<pre><code class="language-cpp">int main()
+{
+    ...
+    double* ptr = max(d, d + k);
+    cout &lt;&lt; "max value is " &lt;&lt; *ptr &lt;&lt; " at index " &lt;&lt; ptr - d &lt;&lt; '\n';
+}</code></pre>
+<p><strong>Пояснення:</strong></p>
+<ul>
+<li>max(d, d + k) шукає найбільший елемент серед k елементів масиву d.</li>
+<li>ptr - d — це <strong>індекс максимального елемента</strong> (різниця адрес).</li>
+<li>ptr — саме значення цього елемента.</li>
+</ul>
+<hr>
+<h3><strong>Ключові ідеї</strong></h3>
+<ul>
+<li>Масив у С++ — це <strong>послідовність у пам’яті</strong>, яку можна обробляти через вказівники.</li>
+<li>Інтервал [start; end) — стандартний підхід у STL (включно з start, виключно end).</li>
+<li>Робота з вказівниками дозволяє <strong>підвищити ефективність</strong> і <strong>універсальність</strong> функцій (аналог стандартних std::max</em>element тощо).</li>
+</ul>
+<h3><strong>Табулювання функції. Завдання.</strong></h3>
+<p>Потрібно створити процедуру, яка <strong>виводить таблицю значень функції</strong></p>
+<p>$y = sin(x)$</p>
+<p>на проміжку $[a; b]$ з кроком $h$.</p>
+<hr>
+<h3><strong>Код прикладу</strong></h3>
+<pre><code class="language-cpp">// Побудова таблиці значень функції sin(x)
+void Tabulate(double a, double b, double h)
+{
+    unsigned n = round((b - a) / h);  // кількість кроків
+
+    // друк шапки таблиці
+    std::cout &lt;&lt; "\t x\t|\t sin(x)\n"
+              &lt;&lt; "-----------------------------\n";
+
+    // обчислення і друк тіла таблиці
+    for (unsigned i = 0; i &lt;= n; ++i)
+    {
+        double x = a + i * h;
+        (std::cout &lt;&lt; '\t').precision(4);
+        (std::cout &lt;&lt; x &lt;&lt; "\t|\t").precision(8);
+        std::cout &lt;&lt; sin(x) &lt;&lt; '\n';
+    }
+
+    std::cout &lt;&lt; '\n';
+}</code></pre>
+<hr>
+<h3><strong>Пояснення</strong></h3>
+<ul>
+<li><strong>n = round((b - a) / h)</strong> — обчислює, скільки точок потрібно для проходження від a до b з кроком h.</li>
+<li><strong>sin(x)</strong> — стандартна математична функція з <cmath>.</li>
+<li><strong>precision(4) / precision(8)</strong> — задає кількість знаків після коми для виводу.</li>
+<li>Таблиця будується послідовно:</li>
+</ul>
+<p>для кожного x = a + i<em>h виводиться пара x та sin(x).</p>
+<hr>
+<h3><strong>Табулювання функції. Завдання 2</strong></h3>
+<p>Написати процедуру, яка <strong>виводить таблицю значень функції</strong></p>
+<p>$y = \sqrt[3]{x}$ (кубічний корінь із x) на проміжку $[a; b]$ з кроком $h$.</p>
+<h3><strong>Код програми</strong></h3>
+<pre><code class="language-cpp">// Побудова таблиці значень функції cbrt(x)
+void Tabulate(double a, double b, double h)
+{
+    unsigned n = round((b - a) / h);   // кількість точок
+
+    // друк шапки таблиці
+    std::cout &lt;&lt; "\t x\t|\t cbrt(x)\n"
+              &lt;&lt; "-----------------------------\n";
+
+    // обчислення та друк значень
+    for (unsigned i = 0; i &lt;= n; ++i)
+    {
+        double x = a + i * h;
+        (std::cout &lt;&lt; '\t').precision(4);
+        (std::cout &lt;&lt; x &lt;&lt; "\t|\t").precision(8);
+        std::cout &lt;&lt; cbrt(x) &lt;&lt; '\n';
+    }
+
+    std::cout &lt;&lt; '\n';
+}</code></pre>
+<h3><strong>Пояснення</strong></h3>
+<ul>
+<li><strong>cbrt(x)</strong> — стандартна функція з бібліотеки <cmath>, що обчислює кубічний корінь.</li>
+<li><strong>n = round((b - a) / h)</strong> — кількість кроків для заданого діапазону.</li>
+<li>Використовується <strong>форматований вивід</strong> для зручного табличного вигляду.</li>
+<li>Цикл for послідовно обчислює значення x<em>i = a + i \cdot h і y</em>i = \sqrt[3]{x_i}.</li>
+</ul>
+<hr>
+<h3><strong>Табулювання довільної функції. Завдання 3.</strong></h3>
+<p>Створити процедуру, яка <strong>виводить таблицю значень будь-якої функції</strong> $y = f(x)$ на проміжку $[a; b]$ із заданим кроком $h$.</p>
+<h3><strong>Код прикладу</strong></h3>
+<pre><code class="language-cpp">// Побудова таблиці значень функції f(x)
+typedef double (*func)(double);
+// або
+// using func = double(*)(double);
+
+void Tabulate(func f, double a, double b, double h)
+{
+    unsigned n = round((b - a) / h);
+
+    // друк шапки таблиці
+    std::cout &lt;&lt; "\t x\t|\t f(x)\n"
+              &lt;&lt; "-----------------------------\n";
+
+    // обчислення і друк тіла таблиці
+    for (unsigned i = 0; i &lt;= n; ++i)
+    {
+        double x = a + i * h;
+        (std::cout &lt;&lt; '\t').precision(4);
+        (std::cout &lt;&lt; x &lt;&lt; "\t|\t").precision(8);
+        std::cout &lt;&lt; f(x) &lt;&lt; '\n';
+    }
+
+    std::cout &lt;&lt; '\n';
+}</code></pre>
+<hr>
+<h3><strong>Пояснення</strong></h3>
+<ul>
+<li><strong>typedef double (</em>func)(double);</strong> — оголошення нового типу func, який є <em>вказівником на функцію</em>, що приймає double і повертає double.</li>
+<li>У функцію Tabulate передається сама функція як аргумент, наприклад sin, cos, exp, log тощо.</li>
+<li>Функція f(x) викликається всередині циклу для кожного значення x.</li>
+</ul>
+<h3><strong>Ключові ідеї</strong></h3>
+<blockquote>Табулювання дозволяє <strong>наочно відобразити поведінку функції</strong> на певному інтервалі.</blockquote>
+>
+<blockquote>Можна змінити cbrt(x) на будь-яку іншу функцію (sin(x), exp(x), log(x) тощо).</blockquote>
+>
+<blockquote>Принцип — <strong>обчислення і виведення пари значень (x, y)</strong> з рівномірним кроком.</blockquote>
+>
+<blockquote>Табулювання — це <strong>побудова таблиці значень функції</strong> за певним кроком.</blockquote>
+>
+<blockquote><strong>Вказівник на функцію</strong> дозволяє передавати будь-яку математичну функцію в одну універсальну процедуру.</blockquote>
+>
+<blockquote>Це приклад <strong>параметризації алгоритму</strong> — змінивши лише аргумент f, можна табулювати різні функції без переписування коду.</blockquote>
+>
+<blockquote>Функція Tabulate демонструє:</blockquote>
+>
+<blockquote>- роботу з <strong>циклами та обчисленнями</strong>;</blockquote>
+<blockquote>- <strong>форматований вивід</strong>;</blockquote>
+<blockquote>- приклад <strong>використання математичних функцій</strong>.</blockquote>
+<hr>
+<h3><strong>Використання функції вищого порядку. Суть ідеї:</strong></h3>
+<p>Функція <strong>вищого порядку</strong> — це функція, яка може <strong>приймати інші функції як параметри</strong> або <strong>повертати функцію</strong>.</p>
+<p>У цьому прикладі Tabulate() приймає функцію f і викликає її під час обчислень.</p>
+<h3><strong>Код програми</strong></h3>
+<pre><code class="language-cpp">double parabola(double);
+
+int main()
+{
+    // Табулювання стандартної функції
+    std::cout &lt;&lt; "\t\tTable 1. y = sin(x)\n";
+    Tabulate(sin, 0.0, M_PI_2, M_PI_2 / 12);
+
+    // Табулювання власної функції
+    std::cout &lt;&lt; "\t\tTable 2. y = x^2 + 2x - 3\n";
+    Tabulate(parabola, -4.0, 2.5, 0.25);
+
+    return 0;
+}
+
+double parabola(double x)
+{
+    return (x + 2.) * x - 3.;
+}</code></pre>
+<h3><strong>Пояснення</strong></h3>
+<ul>
+<li><strong>Tabulate()</strong> — універсальна функція з попереднього прикладу, що приймає будь-яку функцію f(double) як аргумент. ʼʼ</li>
+<li><strong>sin</strong> — стандартна функція з <cmath>.</li>
+<li><strong>parabola</strong> — власна користувацька функція, яка обчислює вираз</li>
+</ul>
+<p>y = x^2 + 2x - 3</p>
+<ul>
+<li>Таким чином, одна і та сама функція Tabulate() може виводити таблицю для різних функцій без зміни коду.</li>
+</ul>
+<h3><strong>Ключові моменти</strong></h3>
+<ul>
+<li>Tabulate() — <strong>функція вищого порядку</strong>, бо приймає функцію як параметр.</li>
+<li>Використання вказівників на функції (typedef double (<em>func)(double)) дозволяє працювати з будь-якими математичними функціями.</li>
+<li>Код стає <strong>гнучким</strong> і <strong>повторно використовуваним</strong>.</li>
+</ul>
+<hr>
+<h3><strong>Використання функції вищого порядку з лямбда-виразом. Завдання 4.</strong></h3>
+<p>Побудувати таблицю значень функції $y = \sqrt{1 - x^2}$ на проміжку $[-1; 1]$ із кроком $0.1$.</p>
+<h3><strong>Код прикладу</strong></h3>
+<pre><code class="language-cpp">// функцію задано лямбда-виразом
+std::cout &lt;&lt; "\t\tTable 3. y = sqrt(1 - x^2)\n";
+
+Tabulate([](double x) { return sqrt(1. - x * x); }, -1.0, 1.0, 0.1);</code></pre>
+<h3><strong>Пояснення</strong></h3>
+<ul>
+<li><strong>Лямбда-вираз</strong> — це короткий спосіб створити функцію «на місці», без окремого оголошення.</li>
+<li>У записі</li>
+</ul>
+<pre><code class="language-cpp">[](double x) { return sqrt(1. - x * x); }</code></pre>
+<ul>
+<li>квадратні дужки [] — це </em>захоплення змінних* (у цьому випадку порожнє, бо нічого не захоплюємо),</li>
+</ul>
+<p>а далі йде тіло функції, яке обчислює вираз \sqrt{1 - x^2}.</p>
+<ul>
+<li>Виклик</li>
+</ul>
+<pre><code class="language-cpp">Tabulate( ... , -1.0, 1.0, 0.1);</code></pre>
+<ul>
+<li>передає цей лямбда-вираз як параметр f до функції Tabulate() —</li>
+</ul>
+<p>саме вона створює таблицю значень.</p>
+<h3><strong>Переваги</strong></h3>
+<ul>
+<li>Не потрібно створювати окрему функцію типу double circle(double x).</li>
+<li>Код стає коротшим і більш гнучким.</li>
+<li>Підходить для одноразових обчислень, коли функцію не треба використовувати повторно.</li>
+</ul>
+<h3><strong>Ключова ідея</strong></h3>
+<p>Лямбда-вирази дозволяють використовувати <strong>анонімні функції</strong> —</p>
+<p>тобто функції, які можна передавати як аргументи іншим функціям,</p>
+<p>що робить код більш функціональним і зручним для математичних задач.</p>
+<hr>
+<h2><strong>Масив функцій (вказівників на функції). Основна ідея:</strong></h2>
+<p>Вказівники на функції дозволяють <strong>зберігати посилання на різні функції в масиві</strong></p>
+<p>і викликати їх динамічно — наприклад, для побудови меню в програмі.</p>
+<h3><strong>Оголошення типу вказівника на функцію</strong></h3>
+<pre><code class="language-cpp">typedef void (*proc)(void);</code></pre>
+<p>Тип proc означає вказівник на функцію, що:</p>
+<ul>
+<li>нічого не повертає (void);</li>
+<li>не приймає параметрів ((void)).</li>
+</ul>
+<h3><strong>Приклад процедур</strong></h3>
+<pre><code class="language-cpp">
+void CalculateRoots()
+{
+    std::cout &lt;&lt; "The roots are calculated successfully!\n\n";
+}
+
+void Integrate()
+{
+    std::cout &lt;&lt; "Integrate...\nIntegrated!\n\n";
+}
+
+void DealWithArray()
+{
+    std::cout &lt;&lt; "Read array A\nRead array B\nCalculate F(A,B)\n\n";
+}
+</code></pre>
+<h3><strong>Масив функцій і робота меню</strong></h3>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+// масив вказівників на функції
+proc menu[4] = {
+    CalculateRoots,
+    Integrate,
+    DealWithArray,
+    []() { std::cout &lt;&lt; "Bye!\n"; }   // лямбда як функція виходу
+};
+
+unsigned k = 0;
+
+int main() {
+    do {
+        std::cout &lt;&lt; "Input your choice:\n"
+                  &lt;&lt; "0 - CalculateRoots\n"
+                  &lt;&lt; "1 - Integrate\n"
+                  &lt;&lt; "2 - DealWithArray\n"
+                  &lt;&lt; "3 - Exit\n&gt;&gt; ";
+        std::cin &gt;&gt; k;
+        k %= 4;           // гарантує коректний індекс
+        menu[k]();        // виклик відповідної функції
+    } while (k != 3);
+}</code></pre>
+<h3><strong>Пояснення</strong></h3>
+<ul>
+<li><strong>Масив menu</strong> зберігає адреси кількох функцій.</li>
+<li>Ви можете викликати будь-яку з них через індекс: menu[0]();, menu[1](); тощо.</li>
+<li>Такий підхід зручний для побудови <strong>інтерактивних меню, систем команд або обробників подій</strong>.</li>
+<li>У прикладі останній елемент масиву — <strong>лямбда-функція</strong>, що виводить "Bye!".</li>
+</ul>
+<h3><strong>Ключові ідеї</strong></h3>
+<ul>
+<li>Масив вказівників на функції — це <strong>структурований спосіб організації викликів</strong> у великих програмах.</li>
+<li>Дозволяє легко <strong>додавати нові дії</strong> без зміни логіки циклу.</li>
+<li>Це реалізація принципу <strong>“менше умов, більше узагальнення”</strong> — замість if чи switch ми викликаємо потрібну функцію напряму.</li>
+</ul>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+typedef void (*proc)(void);
+
+void CalculateRoots()
+{
+    std::cout &lt;&lt; "The roots are calculated successfully!\n\n";
+}
+
+void Integrate()
+{
+    std::cout &lt;&lt; "Integrate...\nIntegrated!\n\n";
+}
+
+void DealWithArray()
+{
+    std::cout &lt;&lt; "Read array A\nRead array B\nCalculate F(A,B)\n\n";
+}
+
+// масив вказівників на функції
+proc menu[4] = {
+    CalculateRoots,
+    Integrate,
+    DealWithArray,
+    []() { std::cout &lt;&lt; "Bye!\n"; }   // лямбда як функція виходу
+};
+
+unsigned k = 0;
+
+int main() {
+    do {
+        std::cout &lt;&lt; "Input your choice:\n"
+                  &lt;&lt; "0 - CalculateRoots\n"
+                  &lt;&lt; "1 - Integrate\n"
+                  &lt;&lt; "2 - DealWithArray\n"
+                  &lt;&lt; "3 - Exit\n&gt;&gt; ";
+        std::cin &gt;&gt; k;
+        k %= 4;           // гарантує коректний індекс
+        menu[k]();        // виклик відповідної функції
+    } while (k != 3);
+}</code></pre>
+<hr>
+<h1><strong>Рекурсивні функції</strong></h1>
+<h2><strong>1. Факторіал числа</strong></h2>
+<p><strong>Математичне означення:</strong></p>
+<p>$n! = 1 × 2 × 3 × … × (n-1) × n$</p>
+<p>або у рекурсивній формі:</p>
+<p>$n! =
+\begin{cases}
+1, & n ≤ 1 \\
+n × (n-1)!, & n > 1
+\end{cases}$</p>
+<p><strong>Код:</strong></p>
+<pre><code class="language-cpp">long long Factorial(unsigned n)
+{
+    if (n &lt; 2) return 1LL;           // базовий випадок (n ≤ 1)
+	    else return n * Factorial(n - 1); // рекурсивний виклик
+}</code></pre>
+<p><strong>Пояснення:</strong></p>
+<ul>
+<li>Якщо n менше 2 — функція повертає 1 (завершення рекурсії).</li>
+<li>Інакше множимо n на факторіал попереднього числа (n-1).</li>
+<li>Кожен виклик відкладається в пам’яті до досягнення базового випадку,</li>
+</ul>
+<p>потім розкручується у зворотному напрямку.</p>
+<p><strong>Приклад:</strong></p>
+<pre><code class="language-cpp">long long F = Factorial(5); // результат: 120</code></pre>
+<hr>
+<h2><strong>2. Переведення числа у систему числення</strong></h2>
+<p><strong>Завдання:</strong></p>
+<p>Вивести запис числа n у системі числення з основою $r (2 ≤ r ≤ 10)$.</p>
+<p><strong>Код:</strong></p>
+<pre><code class="language-cpp">using Natural_t = unsigned long long;
+
+void print_in_radix(Natural_t n, unsigned r)
+{
+    if (n == 0) return;          // базовий випадок (зупинка)
+    else {
+        print_in_radix(n / r, r); // рекурсивне зведення
+        cout &lt;&lt; n % r;            // виведення залишку
+    }
+}</code></pre>
+<p><strong>Пояснення:</strong></p>
+<ul>
+<li>Якщо число стало 0 — рекурсія завершується.</li>
+<li>Інакше функція спочатку ділить число на r,</li>
+</ul>
+<p>а після повернення з рекурсії друкує залишок (n % r).</p>
+<ul>
+<li>Таким чином, цифри виводяться у правильному порядку.</li>
+</ul>
+<p><strong>Приклад виклику:</strong></p>
+<pre><code class="language-cpp">print_in_radix(2025ULL, 5);</code></pre>
+<p><strong>Результат у консолі:</strong></p>
+<pre><code class="language-cpp">31100</code></pre>
+<hr>
+<h2><strong>Основні риси рекурсії</strong></h2>
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th><strong>Елемент</strong></th>
+      <th><strong>Опис</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Базовий випадок</strong></td>
+      <td>Умова, коли рекурсія припиняється</td>
+    </tr>
+    <tr>
+      <td><strong>Рекурсивний виклик</strong></td>
+      <td>Повторний виклик функції з меншим аргументом</td>
+    </tr>
+    <tr>
+      <td><strong>Стек викликів</strong></td>
+      <td>Область пам'яти, де зберігаються незавершені виклики</td>
+    </tr>
+    <tr>
+      <td><strong>Розкрутка рекурсії</strong></td>
+      <td>Повернення результатів після досягнення базового випадку</td>
+    </tr>
+  </tbody>
+</table>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-0">Золотарьов Тимофій. 2025 Конспект лекцій з програмування.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
