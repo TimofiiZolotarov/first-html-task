@@ -341,7 +341,7 @@ cout &lt;&lt; a;           // вивід у потік</code></pre>
                     <p>Правила зі слайду:</p>
                     <ol>
                         <li>
-                            Можна перевантажити тільки стандартні оператори (+ - * / << >>
+                            Можна перевантажити тільки стандартні оператори (+ - * / &lt;&lt; &gt;&gt;
                             [] () тощо).
                         </li>
                         <li>
@@ -486,7 +486,7 @@ Time operator+(const Time&amp; a, const Time&amp; b) {
                         <li><strong>Перевантаження операторів</strong></li>
                     </ol>
 
-                    Робить API “нативним”: - a + b замість add(a,b); - cout << obj
+                    Робить API “нативним”: - a + b замість add(a,b); - cout &lt;&lt; obj
                     замість obj.print(cout); При цьому важливо зберігати очікувану
                     семантику.
 
@@ -496,9 +496,9 @@ Time operator+(const Time&amp; a, const Time&amp; b) {
                     - статика — “спільна пам’ять”/поведінка для всіх екземплярів типу;
                     - friend — “контрольований обхід” інкапсуляції, який варто
                     використовувати обережно.
-                    <h1>
+                    <h2>
                         <strong>1. Метод-оператор усередині класу (оператор+)</strong>
-                    </h1>
+                    </h2>
                     <h3><strong>Що це?</strong></h3>
                     <p>
                         Перевантаження оператора +
@@ -541,19 +541,19 @@ Time C = A + B;</code></pre>
                         </li>
                     </ul>
                     <hr>
-                    <h1>
+                    <h2>
                         <strong>2. Перевантаження операторів через звичайну функцію
-                            (operator<<)</strong>
-                    </h1>
+                            (operator&lt;&lt;)</strong>
+                    </h2>
                     <h3><strong>Що це?</strong></h3>
-                    <p>Тут оператор << не може бути методом класу, бо у виразі:</p>
+                    <p>Тут оператор &lt;&lt; не може бути методом класу, бо у виразі:</p>
                     <pre><code class="language-cpp">cout &lt;&lt; A;</code></pre>
                     <p>
                         — <strong>зліва знаходиться cout</strong>, який не є об’єктом
                         Time.
                     </p>
                     <p>
-                        Тому operator<< повинен бути <strong>вільною функцією</strong>.
+                        Тому operator&lt;&lt; повинен бути <strong>вільною функцією</strong>.
                     </p>
                     <h3><strong>Як працює?</strong></h3>
                     <pre><code class="language-cpp">ostream&amp; operator&lt;&lt;(ostream&amp; os, const Time&amp; t) {
@@ -563,14 +563,14 @@ Time C = A + B;</code></pre>
                     <ul>
                         <li>Першим параметром приймає потік.</li>
                         <li>
-                            Повертає потік, щоб операції ланцюжились (cout << A << B).
+                            Повертає потік, щоб операції ланцюжились (cout &lt;&lt; A &lt;&lt; B).
                         </li>
                     </ul>
                     <h3><strong>Навіщо?</strong></h3>
                     <p>Це дає можливість красиво друкувати об’єкти:</p>
                     <pre><code class="language-cpp">cout &lt;&lt; A;</code></pre>
                     <hr>
-                    <h1><strong>3. Множення Time на число (operator)</strong></h1>
+                    <h2><strong>3. Множення Time на число (operator)</strong></h2>
                     <h3><strong>Що це?</strong></h3>
                     <p>Перевантаження оператора множення, щоб:</p>
                     <pre><code class="language-cpp">Time study(1,20);
@@ -594,9 +594,9 @@ Time total = study * 3;</code></pre>
                         зовнішня функція».
                     </p>
                     <hr>
-                    <h1>
+                    <h2>
                         <strong>4. Перетворення типів (конструктор + operator int())</strong>
-                    </h1>
+                    </h2>
                     <h3><strong>Проблема</strong></h3>
                     <p>Хочемо робити:</p>
                     <pre><code class="language-cpp">Time A(1,20);
@@ -617,7 +617,7 @@ int x = B;          // перетворити Time → хвилини</code></pr
                     <p>Щоб уникнути небезпечних неявних перетворень:</p>
                     <pre><code class="language-cpp">Time A = 5; // забороняємо таке</code></pre>
                     <hr>
-                    <h1><strong>5. Автоматично згенеровані члени класу</strong></h1>
+                    <h2><strong>5. Автоматично згенеровані члени класу</strong></h2>
                     <p>C++ сам генерує:</p>
                     <ul>
                         <li>конструктор за замовчуванням</li>
@@ -636,7 +636,7 @@ int x = B;          // перетворити Time → хвилини</code></pr
                         динамічної пам’яті.
                     </p>
                     <hr>
-                    <h1><strong>6. Конструктор копіювання</strong></h1>
+                    <h2><strong>6. Конструктор копіювання</strong></h2>
                     <h3><strong>Що це?</strong></h3>
                     <p>Коли ти створюєш новий об’єкт зі старого:</p>
                     <pre><code class="language-cpp">Time B = A;
@@ -645,7 +645,7 @@ Time C(A);</code></pre>
                     <h3><strong>Для Time вистачає “поверхневої копії”</strong></h3>
                     <h3><strong>, бо в ньому тільки int.</strong></h3>
                     <hr>
-                    <h1><strong>7. Оператор копіювального присвоєння</strong></h1>
+                    <h2><strong>7. Оператор копіювального присвоєння</strong></h2>
                     <h3><strong>Що це?</strong></h3>
                     <p>Викликається при:</p>
                     <pre><code class="language-cpp">A = B;</code></pre>
@@ -660,9 +660,9 @@ Time C(A);</code></pre>
                     <h3><strong>Головне правило</strong></h3>
                     <p><strong>Завжди перевірка на самоприсвоєння</strong>.</p>
                     <hr>
-                    <h1>
+                    <h2>
                         <strong>8. Коли треба власні копіювання/присвоєння?</strong>
-                    </h1>
+                    </h2>
                     <h3><strong>Правило 3-х (Rule of Three)</strong></h3>
                     <p>Якщо в класі є динамічна пам’ять (new, new[]):</p>
                     <ol>
@@ -672,10 +672,10 @@ Time C(A);</code></pre>
                     </ol>
                     <p>Інакше будуть витоки, подвійні delete, креші.</p>
                     <hr>
-                    <h1>
+                    <h2>
                         <strong>9. Клас StringBad — приклад неправильного управління
                             пам’яттю</strong>
-                    </h1>
+                    </h2>
                     <h3><strong>Проблема</strong></h3>
                     <p>Конструктор виділяє пам’ять:</p>
                     <pre><code class="language-cpp">str = new char[len+1];</code></pre>
@@ -686,7 +686,7 @@ Time C(A);</code></pre>
                     <p>=> два об’єкти вказують на одну й ту ж пам’ять</p>
                     <p>=> подвійний delete → UB, креш.</p>
                     <hr>
-                    <h1><strong>10. Виправлений варіант (глибока копія)</strong></h1>
+                    <h2><strong>10. Виправлений варіант (глибока копія)</strong></h2>
                     <h3><strong>Коректний конструктор копіювання</strong></h3>
                     <pre><code class="language-csharp">StringBad::StringBad(const StringBad&amp; st) {
     len = st.len;
@@ -710,7 +710,7 @@ Time C(A);</code></pre>
                         ділитись одним буфером.
                     </p>
                     <hr>
-                    <h1><strong>11. Чому це важливо для ООП?</strong></h1>
+                    <h2><strong>11. Чому це важливо для ООП?</strong></h2>
                     <p>Це дозволяє:</p>
                     <ul>
                         <li>контролювати життєвий цикл об’єкта</li>
