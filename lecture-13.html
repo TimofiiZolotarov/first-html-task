@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="uk">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Lecture n13.2 Classes. - Програмування</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-          rel="stylesheet"/>
+          rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css"
-          rel="stylesheet"/>
-    <meta content="Lecture n13.2 Classes." name="description"/>
+          rel="stylesheet">
+    <meta content="Lecture n13.2 Classes." name="description">
 
-    <meta content="Lecture n13.2 Classes." property="og:title"/>
-    <meta content="article" property="og:type"/>
-    <meta content="Lecture n13.2 Classes." property="og:description"/>
+    <meta content="Lecture n13.2 Classes." property="og:title">
+    <meta content="article" property="og:type">
+    <meta content="Lecture n13.2 Classes." property="og:description">
 
-    <link href="https://www.w3schools.com/favicon.ico" rel="icon" sizes="any"/>
+    <link href="https://www.w3schools.com/favicon.ico" rel="icon" sizes="any">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
@@ -105,7 +105,7 @@
                             share_val).
                         </li>
                     </ul>
-                    <hr/>
+                    <hr>
                     <h2><strong>2. Клас Stock.</strong></h2>
                     <p>Спрощено:</p>
                     <pre><code class="language-cpp">class Stock {
@@ -217,7 +217,7 @@ public:
                         З погляду ООП: Stock — інкапсульований тип з інваріантами,
                         статичними ресурсами й чітким життєвим циклом.
                     </p>
-                    <hr/>
+                    <hr>
                     <h2>
                         <strong>3. Оголошення змінних, констант, масивів, вказівників</strong>
                     </h2>
@@ -264,7 +264,7 @@ delete p;</code></pre>
                     </ul>
                     - розмір або тривалість життя не збігається з областю видимості; -
                     робиш складні структури (списки, дерева).
-                    <hr/>
+                    <hr>
                     <h2><strong>4. Клас і функції: передача об’єктів</strong></h2>
                     <p>Приклад зі слайду:</p>
                     <pre><code class="language-cpp">bool greater(double a, double b) { return a &gt; b; }
@@ -303,7 +303,7 @@ bool greater(const Stock&amp; a, const Stock&amp; b) {
                             знаючи внутрішньої реалізації.
                         </li>
                     </ul>
-                    <hr/>
+                    <hr>
                     <h2><strong>5. Додаткові послуги класу</strong></h2>
                     <p>Тут про:</p>
                     <ul>
@@ -328,7 +328,7 @@ bool greater(const Stock&amp; a, const Stock&amp; b) {
                         <strong>повноцінним сервісом</strong> навколо певної концепції
                         (акції, час, матриця тощо).
                     </p>
-                    <hr/>
+                    <hr>
                     <h2><strong>6. Перевантаження операторів глибше</strong></h2>
                     <p>
                         Мотивація: хочемо працювати з об’єктами так само природно, як з
@@ -370,7 +370,7 @@ cout &lt;&lt; a;           // вивід у потік</code></pre>
                             обидва порядки операндів (Matrix + Matrix, Vector + Vector).
                         </li>
                     </ul>
-                    <hr/>
+                    <hr>
                     <h2><strong>7. Зовнішній оператор+ для класу Time</strong></h2>
                     <p>Фрагмент зі слайду:</p>
                     <pre><code class="language-cpp">class Time {
@@ -409,7 +409,7 @@ Time operator+(const Time&amp; a, const Time&amp; b) {
                         Це “правильний” OO-стиль: зовнішній код бачить тільки інтерфейс
                         класу, а не поля.
                     </p>
-                    <hr/>
+                    <hr>
                     <h2><strong>8. Дружня функція-оператор для Time</strong></h2>
                     <p>Варіант зі friend:</p>
                     <pre><code class="language-cpp">class Time {
@@ -456,7 +456,7 @@ Time operator+(const Time&amp; a, const Time&amp; b) {
                         Головне: не робити friend “за замовчуванням”, а тільки там, де
                         справді потрібно.
                     </p>
-                    <hr/>
+                    <hr>
                     <h2><strong>9. ООП-погляд загалом</strong></h2>
                     <p>Якщо стиснути все, що на цих слайдах, до кількох ідей:</p>
                     <ol>
@@ -540,7 +540,7 @@ Time C = A + B;</code></pre>
                             вбудовані типи.
                         </li>
                     </ul>
-                    <hr/>
+                    <hr>
                     <h1>
                         <strong>2. Перевантаження операторів через звичайну функцію
                             (operator<<)</strong>
@@ -569,7 +569,7 @@ Time C = A + B;</code></pre>
                     <h3><strong>Навіщо?</strong></h3>
                     <p>Це дає можливість красиво друкувати об’єкти:</p>
                     <pre><code class="language-cpp">cout &lt;&lt; A;</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>3. Множення Time на число (operator)</strong></h1>
                     <h3><strong>Що це?</strong></h3>
                     <p>Перевантаження оператора множення, щоб:</p>
@@ -593,7 +593,7 @@ Time total = study * 3;</code></pre>
                         «Якщо оператор має працювати симетрично — іноді потрібна
                         зовнішня функція».
                     </p>
-                    <hr/>
+                    <hr>
                     <h1>
                         <strong>4. Перетворення типів (конструктор + operator int())</strong>
                     </h1>
@@ -616,7 +616,7 @@ int x = B;          // перетворити Time → хвилини</code></pr
                     <h3><strong>Чому explicit?</strong></h3>
                     <p>Щоб уникнути небезпечних неявних перетворень:</p>
                     <pre><code class="language-cpp">Time A = 5; // забороняємо таке</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>5. Автоматично згенеровані члени класу</strong></h1>
                     <p>C++ сам генерує:</p>
                     <ul>
@@ -635,7 +635,7 @@ int x = B;          // перетворити Time → хвилини</code></pr
                         Бо ці автоматичні реалізації працюють тільки для класів без
                         динамічної пам’яті.
                     </p>
-                    <hr/>
+                    <hr>
                     <h1><strong>6. Конструктор копіювання</strong></h1>
                     <h3><strong>Що це?</strong></h3>
                     <p>Коли ти створюєш новий об’єкт зі старого:</p>
@@ -644,7 +644,7 @@ Time C(A);</code></pre>
                     <p>Генерується <strong>копія даних</strong>.</p>
                     <h3><strong>Для Time вистачає “поверхневої копії”</strong></h3>
                     <h3><strong>, бо в ньому тільки int.</strong></h3>
-                    <hr/>
+                    <hr>
                     <h1><strong>7. Оператор копіювального присвоєння</strong></h1>
                     <h3><strong>Що це?</strong></h3>
                     <p>Викликається при:</p>
@@ -659,7 +659,7 @@ Time C(A);</code></pre>
 }</code></pre>
                     <h3><strong>Головне правило</strong></h3>
                     <p><strong>Завжди перевірка на самоприсвоєння</strong>.</p>
-                    <hr/>
+                    <hr>
                     <h1>
                         <strong>8. Коли треба власні копіювання/присвоєння?</strong>
                     </h1>
@@ -671,7 +671,7 @@ Time C(A);</code></pre>
                         <li><strong>треба оголосити деструктор</strong></li>
                     </ol>
                     <p>Інакше будуть витоки, подвійні delete, креші.</p>
-                    <hr/>
+                    <hr>
                     <h1>
                         <strong>9. Клас StringBad — приклад неправильного управління
                             пам’яттю</strong>
@@ -685,7 +685,7 @@ Time C(A);</code></pre>
                     </p>
                     <p>=> два об’єкти вказують на одну й ту ж пам’ять</p>
                     <p>=> подвійний delete → UB, креш.</p>
-                    <hr/>
+                    <hr>
                     <h1><strong>10. Виправлений варіант (глибока копія)</strong></h1>
                     <h3><strong>Коректний конструктор копіювання</strong></h3>
                     <pre><code class="language-csharp">StringBad::StringBad(const StringBad&amp; st) {
@@ -709,7 +709,7 @@ Time C(A);</code></pre>
                         Щоб кожен об’єкт мав свою <strong>копію пам’яті</strong>, а не
                         ділитись одним буфером.
                     </p>
-                    <hr/>
+                    <hr>
                     <h1><strong>11. Чому це важливо для ООП?</strong></h1>
                     <p>Це дозволяє:</p>
                     <ul>

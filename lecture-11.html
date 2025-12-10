@@ -1,23 +1,23 @@
 <!doctype html>
 <html lang="uk">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Lecture n11. Flow, Stream, Throad, Torrent. - Програмування</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-          rel="stylesheet"/>
+          rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css"
-          rel="stylesheet"/>
+          rel="stylesheet">
     <meta content="Lecture n11.  Flow, Stream, Throad, Torrent."
-          name="description"/>
+          name="description">
 
     <meta content="Lecture n11.  Flow, Stream, Throad, Torrent."
-          property="og:title"/>
-    <meta content="article" property="og:type"/>
+          property="og:title">
+    <meta content="article" property="og:type">
     <meta content="Lecture n11.  Flow, Stream, Throad, Torrent."
-          property="og:description"/>
+          property="og:description">
 
-    <link href="https://www.w3schools.com/favicon.ico" rel="icon" sizes="any"/>
+    <link href="https://www.w3schools.com/favicon.ico" rel="icon" sizes="any">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
@@ -120,7 +120,7 @@ int main() {
     cin &gt;&gt; a;
     clog &lt;&lt; "Отримано число: " &lt;&lt; a &lt;&lt; endl;
 }</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>2. Файлові потоки</strong></h2>
                     <p>Для роботи з файлами у C++ використовують класи:</p>
                     <ul>
@@ -150,7 +150,7 @@ int main() {
     fin.close();
     fout.close();
 }</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>3. Буферизація</strong></h2>
                     <p>
                         Під час зчитування і запису дані проходять через
@@ -165,7 +165,7 @@ int main() {
   +---------+           +---------+
        ↓                     ↑
    ifstream fin          ofstream fout</code></pre>
-                    <hr/>
+                    <hr>
                     <h2>
                         <strong>4. Форматоване та неформатоване виведення</strong>
                     </h2>
@@ -179,7 +179,7 @@ cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; ", y = " &lt;&lt; y;</code></pre>
                     <pre><code class="language-cpp">ofstream f("out.txt", ios::binary);
 f.put('A');           // запис одного символа
 f.write("Hello", 5);  // запис 5 байтів</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>5. Форматування виводу</strong></h2>
                     <p>
                         Форматування дозволяє керувати виглядом чисел, відступів,
@@ -197,7 +197,7 @@ int main() {
     cout.width(10);                             // ширина поля 10
     cout &lt;&lt; x &lt;&lt; endl;                          //     +7.5000
 }</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>6. Маніпулятори (з)</strong></h2>
                     <p>
                         Маніпулятори — це вбудовані інструменти для форматування потоку.
@@ -244,7 +244,7 @@ int main() {
                     <pre><code class="language-cpp">#include &lt;iomanip&gt;
 cout &lt;&lt; boolalpha &lt;&lt; true;           // виведе "true"
 cout &lt;&lt; setw(8) &lt;&lt; setfill('*') &lt;&lt; 123; // *****123</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>7. Приклад задачі з лекції</strong></h2>
                     <p><strong>Умова:</strong></p>
                     <p>Дано три 100-елементні масиви a, b, c дійсних чисел.</p>
@@ -255,7 +255,7 @@ cout &lt;&lt; setw(8) &lt;&lt; setfill('*') &lt;&lt; 123; // *****123</code></pr
                     </p>
                     <p>де</p>
                     <p>$(a,b) = \sum_{i=0}^{99} a_i b_i$</p>
-                    <hr/>
+                    <hr>
                     <h3><strong>Рішення через файли</strong></h3>
                     <h3><strong>Вхідні дані (data.txt):</strong></h3>
                     <pre><code class="language-cpp">1.2 3.5 4.0 ...
@@ -292,7 +292,7 @@ int main() {
     fin.close();
     fout.close();
 }</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>8. Форматні прапорці setf()</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -336,7 +336,7 @@ int main() {
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>9. Використання маніпуляторів</strong></h2>
                     <p>
                         Для зручності замість setf() часто використовують маніпулятори з
@@ -354,7 +354,7 @@ int main() {
 }</code></pre>
                     <p>Результат на екрані:</p>
                     <pre><code class="language-cpp">    +7.5000</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>10. Висновки</strong></h2>
                     <ol>
                         <li>
@@ -383,7 +383,7 @@ int main() {
                         (усе коротко, системно і з прикладами — ідеально для підготовки
                         або здачі лабораторної)
                     </p>
-                    <hr/>
+                    <hr>
                     <h2><strong>1. Основні методи istream (читання)</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -431,7 +431,7 @@ int main() {
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>2. Стани потоку</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -469,7 +469,7 @@ int main() {
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>3. Файлові потоки (fstream)</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -497,7 +497,7 @@ int main() {
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>4. Режими відкриття файлу (ios::flags)</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -535,7 +535,7 @@ int main() {
                     </table>
                     <p><strong>Приклад:</strong></p>
                     <pre><code class="language-cpp">ofstream fout("log.txt", ios::app | ios::out);</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>5. Читання з файлу</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -572,7 +572,7 @@ int main() {
 int x, sum = 0;
 while (fin &gt;&gt; x) sum += x;
 fin.close();</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>6. Запис у файл</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -600,7 +600,7 @@ fin.close();</code></pre>
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>7. Потоки з рядками (sstream)</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -625,7 +625,7 @@ fin.close();</code></pre>
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2>
                         <strong>8. Форматування виведення ( &lt;iomanip&gt;) </strong>
                     </h2>
@@ -675,7 +675,7 @@ fin.close();</code></pre>
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>9. Приклад форматованого виведення</strong></h2>
                     <pre><code class="language-cpp">#include &lt;iostream&gt;
 #include &lt;iomanip&gt;
@@ -689,7 +689,7 @@ int main() {
     cout.width(10);
     cout &lt;&lt; x &lt;&lt; endl;  // результат:   +7.5000
 }</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>10. Пам’ятка</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -729,13 +729,13 @@ int main() {
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h1><strong>Методи класу istream</strong></h1>
                     <p><strong>1. ignore(int k = 1, int t = EOF)</strong></p>
                     <p>→ пропускає k символів або досягнення символу t.</p>
                     <p>Зручно для очищення буфера після cin.</p>
                     <pre><code class="language-cpp">cin.ignore(1000, '\n'); // пропустити до кінця рядка</code></pre>
-                    <hr/>
+                    <hr>
                     <p><strong>2. read(char* addr, int count)</strong></p>
                     <p>
                         → читає count байтів <strong>без перетворення типів</strong>,
@@ -743,7 +743,7 @@ int main() {
                     </p>
                     <pre><code class="language-cpp">char buf[50];
 cin.read(buf, 50); // читає 50 байтів</code></pre>
-                    <hr/>
+                    <hr>
                     <p><strong>3. gcount()</strong></p>
                     <p>
                         → повертає кількість байтів, прочитаних
@@ -752,13 +752,13 @@ cin.read(buf, 50); // читає 50 байтів</code></pre>
                     </p>
                     <pre><code class="language-cpp">cin.read(buf, 50);
 cout &lt;&lt; "Прочитано: " &lt;&lt; cin.gcount() &lt;&lt; " байтів\n";</code></pre>
-                    <hr/>
+                    <hr>
                     <p><strong>4. putback(char c)</strong></p>
                     <p>→ повертає символ назад у потік (ніби «відмотує» введення).</p>
                     <pre><code class="language-cpp">char c;
 cin.get(c);
 if (isdigit(c)) cin.putback(c);</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>Що таке файл</strong></h1>
                     <ul>
                         <li>
@@ -778,7 +778,7 @@ if (isdigit(c)) cin.putback(c);</code></pre>
                             <strong>вказівник поточної позиції</strong>.
                         </li>
                     </ul>
-                    <hr/>
+                    <hr>
                     <h1><strong>Навіщо файл програмі</strong></h1>
                     <ol>
                         <li>Зчитати великі обсяги вхідних даних.</li>
@@ -786,7 +786,7 @@ if (isdigit(c)) cin.putback(c);</code></pre>
                         <li>Тимчасово зберегти проміжні результати.</li>
                         <li>Передати дані іншій програмі.</li>
                     </ol>
-                    <hr/>
+                    <hr>
                     <h1><strong>Схема читання даних з файлу</strong></h1>
                     <pre><code class="language-cpp">#include &lt;fstream&gt;
 using namespace std;
@@ -803,7 +803,7 @@ int main() {
 }</code></pre>
                     <p>Короткий варіант:</p>
                     <pre><code class="language-cpp">ifstream fin("data.txt");</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>Приклад функції читання масиву з файлу</strong></h1>
                     <pre><code class="language-cpp">#include &lt;fstream&gt;
 using namespace std;
@@ -820,7 +820,7 @@ int main() {
     ReadArray(arr, n, fin);
     fin.close();
 }</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>Приклад підрахунку суми з файлу</strong></h1>
                     <pre><code class="language-cpp">const char* fileName = "numbers.txt";
 ifstream fin(fileName);
@@ -833,7 +833,7 @@ if (fin.is_open()) {
     cout &lt;&lt; "File not found\n";
 }
 fin.close();</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>Схема запису у файл</strong></h1>
                     <pre><code class="language-cpp">#include &lt;fstream&gt;
 using namespace std;
@@ -849,7 +849,7 @@ int main() {
 }</code></pre>
                     <p>Коротко:</p>
                     <pre><code class="language-cpp">ofstream fout("result.txt");</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>Табуляція значень у файл</strong></h1>
                     <pre><code class="language-cpp">void TabulateToStream(ostream&amp; os, double (*f)(double),
                       double a, double b, double h) {
@@ -864,7 +864,7 @@ int main() {
     TabulateToStream(fout, sin, 0, 3.14, 0.1);
     fout.close();
 }</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>Читання та запис з рядка</strong></h1>
                     <pre><code class="language-cpp">#include &lt;sstream&gt;
 #include &lt;string&gt;
@@ -880,7 +880,7 @@ int main() {
     sout &lt;&lt; "Sum=" &lt;&lt; (a+b+c+d);
     string text = sout.str();  // отримати результат
 }</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>Режими відкриття файлу</strong></h1>
                     <pre><code class="language-cpp">fin.open(fileName, modeConst);</code></pre>
                     <table class="table table-bordered table-striped">
@@ -919,7 +919,7 @@ int main() {
                     </table>
                     <p>Комбінації можливі:</p>
                     <pre><code class="language-cpp">ofstream fout("log.txt", ios::app | ios::out);</code></pre>
-                    <hr/>
+                    <hr>
                     <h1><strong>Підсумок</strong></h1>
                     <ol>
                         <li>Для роботи з файлами використовують fstream.</li>
@@ -940,7 +940,7 @@ int main() {
                             ofstream наслідує ostream.
                         </li>
                     </ol>
-                    <hr/>
+                    <hr>
                     <h2><strong>1. Використання двійкових файлів</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -954,16 +954,16 @@ int main() {
                         <tr>
                             <td>Запис структури у двійковий файл</td>
                             <td>
-                                <code>ofstream fout("planet.bin", ios::out | ios::binary);<br/>fout.write((char*)&PL,
-                                    sizeof(PL));<br/>fout.close();</code>
+                                <code>ofstream fout("planet.bin", ios::out | ios::binary);<br>fout.write((char*)&PL,
+                                    sizeof(PL));<br>fout.close();</code>
                             </td>
                             <td>Записує структуру у двійковому форматі</td>
                         </tr>
                         <tr>
                             <td>Читання з двійкового файлу</td>
                             <td>
-                                <code>ifstream fin("planet.bin", ios::in | ios::binary);<br/>fin.read((char*)&Earth,
-                                    sizeof(Earth));<br/>fin.close();</code>
+                                <code>ifstream fin("planet.bin", ios::in | ios::binary);<br>fin.read((char*)&Earth,
+                                    sizeof(Earth));<br>fin.close();</code>
                             </td>
                             <td>Читає структуру з двійкового файлу</td>
                         </tr>
@@ -979,7 +979,7 @@ int main() {
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2>
                         <strong>2. Обмін двійковими даними між програмами</strong>
                     </h2>
@@ -1017,13 +1017,13 @@ int main() {
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>3. Табулювання функції (C++)</strong></h2>
                     <h3><strong>Завдання</strong></h3>
                     <p>Побудувати таблицю значень функції</p>
                     <p>$y = \sin(x)$</p>
                     <p>і записати результати у двійковий файл.</p>
-                    <hr/>
+                    <hr>
                     <h3><strong>Код програми</strong></h3>
                     <pre><code class="language-cpp">#include &lt;iostream&gt;
 #include &lt;fstream&gt;
@@ -1057,7 +1057,7 @@ int main() {
     }
     fout.close();
 }</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>3. Табулювання функції (C++)</strong></h2>
                     <p>
                         Створюється файл <strong>table.dat</strong>, у якому
@@ -1066,7 +1066,7 @@ int main() {
                     </p>
                     <p>Усього 11 пар чисел:</p>
                     <pre><code class="language-cpp">(0, sin(0)), (0.1, sin(0.1)), ..., (1.0, sin(1.0))</code></pre>
-                    <hr/>
+                    <hr>
                     <h2>
                         <strong>4. Програма на Pascal для зчитування таблиці</strong>
                     </h2>
@@ -1076,7 +1076,7 @@ int main() {
                         на C++,
                     </p>
                     <p>і вивести таблицю значень x та sin(x) на екран.</p>
-                    <hr/>
+                    <hr>
                     <h3><strong>Код програми</strong></h3>
                     <pre><code class="language-cpp">program fileTable;
 uses SysUtils;
@@ -1108,7 +1108,7 @@ begin
 
   CloseFile(f);
 end.</code></pre>
-                    <hr/>
+                    <hr>
                     <h3><strong>Результат</strong></h3>
                     <p>Програма читає двійкові дані, записані C++,</p>
                     <p>і виводить відформатовану таблицю:</p>
@@ -1219,7 +1219,7 @@ plt.show()</code></pre>
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>7. Підсумок: текстові vs двійкові файли</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -1257,7 +1257,7 @@ plt.show()</code></pre>
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>8. Найважливіше запам’ятати</strong></h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">

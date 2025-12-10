@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="uk">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Lecture n8. Structures, constructors. - Програмування</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-          rel="stylesheet"/>
+          rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css"
-          rel="stylesheet"/>
-    <meta content="Lecture n8. Structures, constructors." name="description"/>
+          rel="stylesheet">
+    <meta content="Lecture n8. Structures, constructors." name="description">
 
-    <meta content="Lecture n8. Structures, constructors." property="og:title"/>
-    <meta content="article" property="og:type"/>
+    <meta content="Lecture n8. Structures, constructors." property="og:title">
+    <meta content="article" property="og:type">
     <meta content="Lecture n8. Structures, constructors."
-          property="og:description"/>
+          property="og:description">
 
-    <link href="https://www.w3schools.com/favicon.ico" rel="icon" sizes="any"/>
+    <link href="https://www.w3schools.com/favicon.ico" rel="icon" sizes="any">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
@@ -70,11 +70,11 @@
                     <img alt="Lecture 8"
                          class="img-fluid mb-4"
                          src="img/img.png"
-                         style="max-width: 100%; height: auto"/>
+                         style="max-width: 100%; height: auto">
                     <h3>
                         <em>Вибір типів і проєктування функцій для ламаної лінії</em>
                     </h3>
-                    <hr/>
+                    <hr>
                     <h3><strong>Вибір типів</strong></h3>
                     <h3><strong>1. Опис однієї вершини (вузла) ламаної</strong></h3>
                     <pre><code class="language-cpp">double x, y; // абсциса та ордината</code></pre>
@@ -106,7 +106,7 @@ double x[N], y[N];  // послідовність абсцис і ординат
 
                     vert[i][0] — координата x vert[i][1] — координата y
                     <p>Тобто (vert[i][0], vert[i][1]) — це координати вершини i.</p>
-                    <hr/>
+                    <hr>
                     <h3><strong>Об’єднання координат у структуру</strong></h3>
                     <p>
                         Щоб не зберігати x і y окремо, їх
@@ -131,7 +131,7 @@ Point C = {5, 5}; // ініціалізація одразу обох коорд
 Point *D = new Point(); // створення в динамічній пам'яті</code></pre>
                     <p>📘 A, B, C — звичайні змінні типу Point.</p>
                     <p>📘 D — вказівник (pointer) на точку.</p>
-                    <hr/>
+                    <hr>
                     <h3><strong>Масив точок (ламана)</strong></h3>
                     <pre><code class="language-cpp">const int N = 7;
 Point Vertex[N]; // послідовність точок</code></pre>
@@ -146,7 +146,7 @@ Point Vertex[N]; // послідовність точок</code></pre>
                     <p>
                         координати точок треба <strong>вводити з клавіатури</strong>.
                     </p>
-                    <hr/>
+                    <hr>
                     <h3><strong>1. Функція, що повертає введену точку</strong></h3>
                     <pre><code class="language-cpp">Point readPoint() {
     Point answer;
@@ -159,7 +159,7 @@ Point Vertex[N]; // послідовність точок</code></pre>
                         <li>читає координати</li>
                         <li>повертає заповнену точку</li>
                     </ul>
-                    <hr/>
+                    <hr>
                     <h3>
                         <strong>2. Функція, яка приймає точку як параметр</strong>
                     </h3>
@@ -173,7 +173,7 @@ Point Vertex[N]; // послідовність точок</code></pre>
                         </li>
                         <li>не повертає результат (тип void)</li>
                     </ul>
-                    <hr/>
+                    <hr>
                     <h3><strong>3. Оператор вводу з потоку</strong></h3>
                     <pre><code class="language-cpp">std::istream&amp; operator&gt;&gt;(std::istream&amp; is, Point&amp; aPoint) {
     is &gt;&gt; aPoint.x &gt;&gt; aPoint.y;
@@ -182,7 +182,7 @@ Point Vertex[N]; // послідовність точок</code></pre>
                     <p>✅ дозволяє писати просто:</p>
                     <pre><code class="language-cpp">Point P;
 cin &gt;&gt; P; // читає обидві координати</code></pre>
-                    <hr/>
+                    <hr>
                     <h3><strong>Підсумок</strong></h3>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -289,7 +289,7 @@ aPoint.y = 4.2</code></pre>
                     <pre><code class="language-cpp">cin &gt;&gt; P;  // читає обидві координати</code></pre>
                     <p>Це працює аналогічно тому, як cin >> n; читає число,</p>
                     <p>але тепер — для власного типу Point.</p>
-                    <hr/>
+                    <hr>
                     <h3><strong>6. Повна картина</strong></h3>
                     <pre><code class="language-cpp">struct Point {
     double x, y;
@@ -309,7 +309,7 @@ int main() {
                     <p><strong>Приклад вводу/виводу:</strong></p>
                     <pre><code class="language-cpp">Input x and y: 2.5 7.8
 Output: 2.5 7.8</code></pre>
-                    <hr/>
+                    <hr>
                     <h2><strong>Раціональне число (множина Q)</strong></h2>
                     <p>
                         Раціональні числа — це числа, які можна подати у вигляді дробу:
@@ -340,7 +340,7 @@ Output: 2.5 7.8</code></pre>
 }</code></pre>
                     <p>Або коротко через <strong>список ініціалізації</strong>:</p>
                     <pre><code class="language-cpp">Fraction() : num(0), den(1) {}</code></pre>
-                    <hr/>
+                    <hr>
                     <h4><strong>б) Конструктор з параметрами</strong></h4>
                     <pre><code class="language-cpp">Fraction(int a, unsigned b) {
     if (b != 0) {
@@ -436,7 +436,7 @@ cout &lt;&lt; f;   // виведе: 3/5</code></pre>
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>Приклади використання типу Fraction</strong></h2>
                     <p>
                         <strong>Мета:</strong> показати, як створювати, присвоювати і
@@ -489,7 +489,7 @@ Fraction copy;</code></pre>
                             half.
                         </li>
                     </ul>
-                    <hr/>
+                    <hr>
                     <ol start="3">
                         <li><strong>Виведення</strong></li>
                     </ol>
@@ -542,7 +542,7 @@ copy = 1/2</code></pre>
                         </tr>
                         </tbody>
                     </table>
-                    <hr/>
+                    <hr>
                     <h2><strong>Функції для опрацювання структур</strong></h2>
                     <h3><strong>1. Структури для координат</strong></h3>
                     <pre><code class="language-cpp">struct Point {          // Декартові координати точки на площині
