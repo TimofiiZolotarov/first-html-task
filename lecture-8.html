@@ -1,100 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lecture n8. Structures, constructors. - Програмування</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
-  <meta name="description" content="Lecture n8. Structures, constructors.">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Lecture n8. Structures, constructors. - Програмування</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css"
+          rel="stylesheet"/>
+    <meta content="Lecture n8. Structures, constructors." name="description"/>
 
-  <meta property="og:title" content="Lecture n8. Structures, constructors.">
-  <meta property="og:type" content="article">
-  <meta property="og:description" content="Lecture n8. Structures, constructors.">
+    <meta content="Lecture n8. Structures, constructors." property="og:title"/>
+    <meta content="article" property="og:type"/>
+    <meta content="Lecture n8. Structures, constructors."
+          property="og:description"/>
 
-  <link rel="icon" href="https://www.w3schools.com/favicon.ico" sizes="any">
+    <link href="https://www.w3schools.com/favicon.ico" rel="icon" sizes="any"/>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
 </head>
 
 <body class="bg-light">
-  <header class="bg-dark text-white py-4 mb-4">
+<header class="bg-dark text-white py-4 mb-4">
     <div class="container-fluid">
-      <a href="index.html" class="text-white text-decoration-none"><h1 class="mb-0">Програмування</h1></a>
+        <a class="text-white text-decoration-none" href="index.html"><h1 class="mb-0">Програмування</h1></a>
     </div>
-  </header>
+</header>
 
-  <main class="container-fluid">
+<main class="container-fluid">
     <div class="row">
-      <aside class="col-lg-3 mb-4">
-        <nav class="card sticky-lg-top">
-          <div class="card-body">
-            <h5 class="card-title">Зміст</h5>
-            <ul class="list-unstyled">
-              <li class="mb-2"><a href="lecture-6.html" class="text-decoration-none">Функції, параметри, вказівники</a></li>
-              <li class="mb-2"><a href="lecture-7.html" class="text-decoration-none">Масиви</a></li>
-              <li class="mb-2"><a href="lecture-8.html" class="text-decoration-none">Структури, конструктори</a></li>
-              <li class="mb-2"><a href="lecture-9.html" class="text-decoration-none">Лінійні списки</a></li>
-              <li class="mb-2"><a href="lecture-11.html" class="text-decoration-none">Потоки, рекурсія</a></li>
-              <li class="mb-2"><a href="lecture-13.html" class="text-decoration-none">Класи</a></li>
-              <li class="mb-2"><a href="lecture-15.html" class="text-decoration-none">Обробка помилок</a></li>
-            </ul>
-          </div>
-        </nav>
-      </aside>
+        <aside class="col-lg-3 mb-4">
+            <nav class="card sticky-lg-top">
+                <div class="card-body">
+                    <h5 class="card-title">Зміст</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-6.html">Функції, параметри, вказівники</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-7.html">Масиви</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-8.html">Структури, конструктори</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-9.html">Лінійні списки</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-11.html">Потоки, рекурсія</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-13.html">Класи</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-15.html">Обробка помилок</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
 
-      <article class="col-lg-9">
-        <div class="card">
-          <div class="card-body">
-            <h1>Lecture n8. Structures, constructors.</h1>
-<img src="img/img.png" alt="Lecture 8" class="img-fluid mb-4" style="max-width: 100%; height: auto;">
-<h1><em>Вибір типів і проєктування функцій для ламаної лінії</em></h1>
-<hr>
-<h2><strong>Вибір типів</strong></h2>
-<h3><strong>1. Опис однієї вершини (вузла) ламаної</strong></h3>
-<pre><code class="language-cpp">double x, y; // абсциса та ордината</code></pre>
-<ul>
-<li>x — координата по осі X</li>
-<li>y — координата по осі Y</li>
-</ul>
-    
-    → одна вершина ламаної (точка).
-<h3><strong>2. Послідовність вершин ламаної (кілька точок)</strong></h3>
-<pre><code class="language-cpp">const int N = 7;
+        <article class="col-lg-9">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Lecture n8. Structures, constructors.</h2>
+                    <img alt="Lecture 8"
+                         class="img-fluid mb-4"
+                         src="img/img.png"
+                         style="max-width: 100%; height: auto"/>
+                    <h3>
+                        <em>Вибір типів і проєктування функцій для ламаної лінії</em>
+                    </h3>
+                    <hr/>
+                    <h3><strong>Вибір типів</strong></h3>
+                    <h3><strong>1. Опис однієї вершини (вузла) ламаної</strong></h3>
+                    <pre><code class="language-cpp">double x, y; // абсциса та ордината</code></pre>
+                    <ul>
+                        <li>x — координата по осі X</li>
+                        <li>y — координата по осі Y</li>
+                    </ul>
+
+                    → одна вершина ламаної (точка).
+                    <h3>
+                        <strong>2. Послідовність вершин ламаної (кілька точок)</strong>
+                    </h3>
+                    <pre><code class="language-cpp">const int N = 7;
 double x[N], y[N];  // послідовність абсцис і ординат</code></pre>
-<ul>
-<li>Зберігаємо координати кожної вершини у двох масивах:</li>
-</ul>
-    
-    x[i] → X-координата
-    
-    y[i] → Y-координата тієї ж точки.
-    
-<ul>
-<li>Таким чином, точка №i — це (x[i], y[i]).</li>
-</ul>
-<h3><strong>3. Двовимірний масив точок</strong></h3>
-<pre><code class="language-cpp">double vert[N][2]; // послідовність точок</code></pre>
-<ul>
-<li>Кожен рядок масиву — це окрема точка:</li>
-</ul>
-    
-    vert[i][0] — координата x
-    
-    vert[i][1] — координата y
-<p>Тобто (vert[i][0], vert[i][1]) — це координати вершини i.</p>
-<hr>
-<h2><strong>Об’єднання координат у структуру</strong></h2>
-<p>Щоб не зберігати x і y окремо, їх <strong>об’єднують в одну структуру:</strong></p>
-<pre><code class="language-cpp">struct Point {
+                    <ul>
+                        <li>Зберігаємо координати кожної вершини у двох масивах:</li>
+                    </ul>
+
+                    x[i] → X-координата y[i] → Y-координата тієї ж точки.
+
+                    <ul>
+                        <li>Таким чином, точка №i — це (x[i], y[i]).</li>
+                    </ul>
+                    <h3><strong>3. Двовимірний масив точок</strong></h3>
+                    <pre><code class="language-cpp">double vert[N][2]; // послідовність точок</code></pre>
+                    <ul>
+                        <li>Кожен рядок масиву — це окрема точка:</li>
+                    </ul>
+
+                    vert[i][0] — координата x vert[i][1] — координата y
+                    <p>Тобто (vert[i][0], vert[i][1]) — це координати вершини i.</p>
+                    <hr/>
+                    <h3><strong>Об’єднання координат у структуру</strong></h3>
+                    <p>
+                        Щоб не зберігати x і y окремо, їх
+                        <strong>об’єднують в одну структуру:</strong>
+                    </p>
+                    <pre><code class="language-cpp">struct Point {
     double x;
     double y;
 };</code></pre>
-<p>Тепер Point — це новий тип, який описує <strong>одну точку</strong>.</p>
-<h3><strong>Приклади використання</strong></h3>
-<pre><code class="language-cpp">Point A;
+                    <p>
+                        Тепер Point — це новий тип, який описує
+                        <strong>одну точку</strong>.
+                    </p>
+                    <h3><strong>Приклади використання</strong></h3>
+                    <pre><code class="language-cpp">Point A;
 A.x = 3;
 A.y = 4;
 
@@ -102,142 +129,169 @@ Point B = A;     // копіювання точки
 Point C = {5, 5}; // ініціалізація одразу обох координат
 
 Point *D = new Point(); // створення в динамічній пам'яті</code></pre>
-<p>📘 A, B, C — звичайні змінні типу Point.</p>
-<p>📘 D — вказівник (pointer) на точку.</p>
-<hr>
-<h2><strong>Масив точок (ламана)</strong></h2>
-<pre><code class="language-cpp">const int N = 7;
+                    <p>📘 A, B, C — звичайні змінні типу Point.</p>
+                    <p>📘 D — вказівник (pointer) на точку.</p>
+                    <hr/>
+                    <h3><strong>Масив точок (ламана)</strong></h3>
+                    <pre><code class="language-cpp">const int N = 7;
 Point Vertex[N]; // послідовність точок</code></pre>
-<ul>
-<li>Vertex[i] — окрема точка (x, y)</li>
-<li>Vertex[i].x — абсциса точки i</li>
-<li>Vertex[i].y — ордината точки i</li>
-</ul>
-<p>Таким чином, ламану можна подати як набір Point-ів.</p>
-<h2><strong>Проєктування функцій</strong></h2>
-<p>Оскільки ламану задано координатами її вузлів,</p>
-<p>координати точок треба <strong>вводити з клавіатури</strong>.</p>
-<hr>
-<h3><strong>1. Функція, що повертає введену точку</strong></h3>
-<pre><code class="language-cpp">Point readPoint() {
+                    <ul>
+                        <li>Vertex[i] — окрема точка (x, y)</li>
+                        <li>Vertex[i].x — абсциса точки i</li>
+                        <li>Vertex[i].y — ордината точки i</li>
+                    </ul>
+                    <p>Таким чином, ламану можна подати як набір Point-ів.</p>
+                    <h3><strong>Проєктування функцій</strong></h3>
+                    <p>Оскільки ламану задано координатами її вузлів,</p>
+                    <p>
+                        координати точок треба <strong>вводити з клавіатури</strong>.
+                    </p>
+                    <hr/>
+                    <h3><strong>1. Функція, що повертає введену точку</strong></h3>
+                    <pre><code class="language-cpp">Point readPoint() {
     Point answer;
     cout &lt;&lt; "Input x and y of a point: ";
     cin &gt;&gt; answer.x &gt;&gt; answer.y;
     return answer;
 }</code></pre>
-<ul>
-<li>створює локальну змінну answer</li>
-<li>читає координати</li>
-<li>повертає заповнену точку</li>
-</ul>
-<hr>
-<h3><strong>2. Функція, яка приймає точку як параметр</strong></h3>
-<pre><code class="language-cpp">void readPoint(Point&amp; aPoint) {
+                    <ul>
+                        <li>створює локальну змінну answer</li>
+                        <li>читає координати</li>
+                        <li>повертає заповнену точку</li>
+                    </ul>
+                    <hr/>
+                    <h3>
+                        <strong>2. Функція, яка приймає точку як параметр</strong>
+                    </h3>
+                    <pre><code class="language-cpp">void readPoint(Point&amp; aPoint) {
     cout &lt;&lt; "Input x and y of a point: ";
     cin &gt;&gt; aPoint.x &gt;&gt; aPoint.y;
 }</code></pre>
-<ul>
-<li>передаємо посилання Point&, щоб змінити передану точку напряму</li>
-<li>не повертає результат (тип void)</li>
-</ul>
-<hr>
-<h3><strong>3. Оператор вводу з потоку</strong></h3>
-<pre><code class="language-cpp">std::istream&amp; operator&gt;&gt;(std::istream&amp; is, Point&amp; aPoint) {
+                    <ul>
+                        <li>
+                            передаємо посилання Point&, щоб змінити передану точку напряму
+                        </li>
+                        <li>не повертає результат (тип void)</li>
+                    </ul>
+                    <hr/>
+                    <h3><strong>3. Оператор вводу з потоку</strong></h3>
+                    <pre><code class="language-cpp">std::istream&amp; operator&gt;&gt;(std::istream&amp; is, Point&amp; aPoint) {
     is &gt;&gt; aPoint.x &gt;&gt; aPoint.y;
     return is;
 }</code></pre>
-<p>✅ дозволяє писати просто:</p>
-<pre><code class="language-cpp">Point P;
+                    <p>✅ дозволяє писати просто:</p>
+                    <pre><code class="language-cpp">Point P;
 cin &gt;&gt; P; // читає обидві координати</code></pre>
-<hr>
-<h2><strong>Підсумок</strong></h2>
-<table class="table table-bordered table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th><strong>Елемент</strong></th>
-      <th><strong>Призначення</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>double x, y</td>
-      <td>координати однієї точки</td>
-    </tr>
-    <tr>
-      <td>double x[N], y[N]</td>
-      <td>дві послідовності координат</td>
-    </tr>
-    <tr>
-      <td>double vert[N][2]</td>
-      <td>2D-масив координат</td>
-    </tr>
-    <tr>
-      <td>struct Point { double x, y; }</td>
-      <td>власний тип для точки</td>
-    </tr>
-    <tr>
-      <td>Point Vertex[N]</td>
-      <td>масив точок (ламана)</td>
-    </tr>
-    <tr>
-      <td>Point readPoint()</td>
-      <td>функція, що повертає введену точку</td>
-    </tr>
-    <tr>
-      <td>void readPoint(Point&)</td>
-      <td>вводить дані в уже існуючу точку</td>
-    </tr>
-    <tr>
-      <td>operator>></td>
-      <td>зручний ввід через cin >> P</td>
-    </tr>
-  </tbody>
-</table>
-<h3><strong>Код:</strong></h3>
-<pre><code class="language-cpp">std::istream&amp; operator&gt;&gt;(std::istream&amp; is, Point&amp; aPoint) {
+                    <hr/>
+                    <h3><strong>Підсумок</strong></h3>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th><strong>Елемент</strong></th>
+                            <th><strong>Призначення</strong></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>double x, y</td>
+                            <td>координати однієї точки</td>
+                        </tr>
+                        <tr>
+                            <td>double x[N], y[N]</td>
+                            <td>дві послідовності координат</td>
+                        </tr>
+                        <tr>
+                            <td>double vert[N][2]</td>
+                            <td>2D-масив координат</td>
+                        </tr>
+                        <tr>
+                            <td>struct Point { double x, y; }</td>
+                            <td>власний тип для точки</td>
+                        </tr>
+                        <tr>
+                            <td>Point Vertex[N]</td>
+                            <td>масив точок (ламана)</td>
+                        </tr>
+                        <tr>
+                            <td>Point readPoint()</td>
+                            <td>функція, що повертає введену точку</td>
+                        </tr>
+                        <tr>
+                            <td>void readPoint(Point&)</td>
+                            <td>вводить дані в уже існуючу точку</td>
+                        </tr>
+                        <tr>
+                            <td>operator>></td>
+                            <td>зручний ввід через cin >> P</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h3><strong>Код:</strong></h3>
+                    <pre><code class="language-cpp">std::istream&amp; operator&gt;&gt;(std::istream&amp; is, Point&amp; aPoint) {
     is &gt;&gt; aPoint.x &gt;&gt; aPoint.y;
     return is;
 }</code></pre>
-<h2><strong>1. Що це таке</strong></h2>
-<p>Це <strong>перевантаження оператора >></strong> для вашого власного типу Point.</p>
-<ul>
-<li>operator>> — спеціальна функція, яка визначає, <strong>як саме вводити</strong> об’єкти типу Point через стандартний потік вводу (cin).</li>
-<li>Така функція дозволяє програмі “розуміти”, що робити, коли користувач пише:</li>
-</ul>
-<pre><code class="language-cpp">cin &gt;&gt; P;</code></pre>
-<h2><strong>2. Аргументи функції</strong></h2>
-<pre><code class="language-cpp">(std::istream&amp; is, Point&amp; aPoint)</code></pre>
-<ul>
-<li><strong>std::istream& is</strong> — посилання на об’єкт потоку вводу (зазвичай cin).</li>
-<li><strong>Point& aPoint</strong> — посилання на об’єкт, у який треба зчитати дані (щоб зміни були видимі зовні).</li>
-</ul>
-<h2><strong>3. Тіло функції</strong></h2>
-<pre><code class="language-cpp">is &gt;&gt; aPoint.x &gt;&gt; aPoint.y;</code></pre>
-<p>Тут використовується вже стандартний оператор >> для базових типів:</p>
-<ul>
-<li>спочатку читається значення для x;</li>
-<li>потім для y.</li>
-</ul>
-<p>Тобто якщо користувач вводить:</p>
-<pre><code class="language-cpp">3.5 4.2</code></pre>
-<p>то отримаємо:</p>
-<pre><code class="language-cpp">aPoint.x = 3.5
+                    <h3><strong>1. Що це таке</strong></h3>
+                    <p>
+                        Це <strong>перевантаження оператора >></strong> для вашого
+                        власного типу Point.
+                    </p>
+                    <ul>
+                        <li>
+                            operator>> — спеціальна функція, яка визначає,
+                            <strong>як саме вводити</strong> об’єкти типу Point через
+                            стандартний потік вводу (cin).
+                        </li>
+                        <li>
+                            Така функція дозволяє програмі “розуміти”, що робити, коли
+                            користувач пише:
+                        </li>
+                    </ul>
+                    <pre><code class="language-cpp">cin &gt;&gt; P;</code></pre>
+                    <h3><strong>2. Аргументи функції</strong></h3>
+                    <pre><code class="language-cpp">(std::istream&amp; is, Point&amp; aPoint)</code></pre>
+                    <ul>
+                        <li>
+                            <strong>std::istream& is</strong> — посилання на об’єкт потоку
+                            вводу (зазвичай cin).
+                        </li>
+                        <li>
+                            <strong>Point& aPoint</strong> — посилання на об’єкт, у який
+                            треба зчитати дані (щоб зміни були видимі зовні).
+                        </li>
+                    </ul>
+                    <h3><strong>3. Тіло функції</strong></h3>
+                    <pre><code class="language-cpp">is &gt;&gt; aPoint.x &gt;&gt; aPoint.y;</code></pre>
+                    <p>
+                        Тут використовується вже стандартний оператор >> для базових
+                        типів:
+                    </p>
+                    <ul>
+                        <li>спочатку читається значення для x;</li>
+                        <li>потім для y.</li>
+                    </ul>
+                    <p>Тобто якщо користувач вводить:</p>
+                    <pre><code class="language-cpp">3.5 4.2</code></pre>
+                    <p>то отримаємо:</p>
+                    <pre><code class="language-cpp">aPoint.x = 3.5
 aPoint.y = 4.2</code></pre>
-<h2><strong>4. Повернення результату</strong></h2>
-<pre><code class="language-cpp">return is;</code></pre>
-<p>Це дозволяє <strong>ланцюговий ввід</strong>, наприклад:</p>
-<pre><code class="language-cpp">cin &gt;&gt; P1 &gt;&gt; P2 &gt;&gt; P3;</code></pre>
-<p>Тому що після виконання оператор знову повертає cin, і наступний >> може продовжити роботу.</p>
-<h2><strong>5. Як тепер використовується</strong></h2>
-<p>Після перевантаження, замість довгого:</p>
-<pre><code class="language-cpp">cin &gt;&gt; P.x &gt;&gt; P.y;</code></pre>
-<p>можна писати коротко і зрозуміло:</p>
-<pre><code class="language-cpp">cin &gt;&gt; P;  // читає обидві координати</code></pre>
-<p>Це працює аналогічно тому, як cin >> n; читає число,</p>
-<p>але тепер — для власного типу Point.</p>
-<hr>
-<h2><strong>6. Повна картина</strong></h2>
-<pre><code class="language-cpp">struct Point {
+                    <h3><strong>4. Повернення результату</strong></h3>
+                    <pre><code class="language-cpp">return is;</code></pre>
+                    <p>Це дозволяє <strong>ланцюговий ввід</strong>, наприклад:</p>
+                    <pre><code class="language-cpp">cin &gt;&gt; P1 &gt;&gt; P2 &gt;&gt; P3;</code></pre>
+                    <p>
+                        Тому що після виконання оператор знову повертає cin, і наступний>> може продовжити роботу.
+                    </p>
+                    <h3><strong>5. Як тепер використовується</strong></h3>
+                    <p>Після перевантаження, замість довгого:</p>
+                    <pre><code class="language-cpp">cin &gt;&gt; P.x &gt;&gt; P.y;</code></pre>
+                    <p>можна писати коротко і зрозуміло:</p>
+                    <pre><code class="language-cpp">cin &gt;&gt; P;  // читає обидві координати</code></pre>
+                    <p>Це працює аналогічно тому, як cin >> n; читає число,</p>
+                    <p>але тепер — для власного типу Point.</p>
+                    <hr/>
+                    <h3><strong>6. Повна картина</strong></h3>
+                    <pre><code class="language-cpp">struct Point {
     double x, y;
 };
 
@@ -252,36 +306,43 @@ int main() {
     std::cin &gt;&gt; P;       // читає обидва значення
     std::cout &lt;&lt; P.x &lt;&lt; " " &lt;&lt; P.y;
 }</code></pre>
-<p><strong>Приклад вводу/виводу:</strong></p>
-<pre><code class="language-cpp">Input x and y: 2.5 7.8
+                    <p><strong>Приклад вводу/виводу:</strong></p>
+                    <pre><code class="language-cpp">Input x and y: 2.5 7.8
 Output: 2.5 7.8</code></pre>
-<hr>
-<h1><strong>Раціональне число (множина Q)</strong></h1>
-<p>Раціональні числа — це числа, які можна подати у вигляді дробу:</p>
-<p>$Q = \left\{ \frac{p}{q} \mid p \in \mathbb{Z}, \ q \in \mathbb{N} \right\}$</p>
-<p>де</p>
-<ul>
-<li>p — <strong>чисельник (ціле число)</strong>,</li>
-<li>q — <strong>знаменник (натуральне число, q ≠ 0)</strong>.</li>
-</ul>
-<h2><strong>1. Опис структури</strong></h2>
-<p><strong>Fraction</strong></p>
-<pre><code class="language-cpp">struct Fraction {
+                    <hr/>
+                    <h2><strong>Раціональне число (множина Q)</strong></h2>
+                    <p>
+                        Раціональні числа — це числа, які можна подати у вигляді дробу:
+                    </p>
+                    <p>
+                        $Q = \left\{ \frac{p}{q} \mid p \in \mathbb{Z}, \ q \in
+                        \mathbb{N} \right\}$
+                    </p>
+                    <p>де</p>
+                    <ul>
+                        <li>p — <strong>чисельник (ціле число)</strong>,</li>
+                        <li>
+                            q — <strong>знаменник (натуральне число, q ≠ 0)</strong>.
+                        </li>
+                    </ul>
+                    <h3><strong>1. Опис структури</strong></h3>
+                    <p><strong>Fraction</strong></p>
+                    <pre><code class="language-cpp">struct Fraction {
     int num;        // чисельник – ціле число
     unsigned den;   // знаменник – натуральне число
 };</code></pre>
-<h2><strong>2. Конструктори</strong></h2>
-<h3><strong>а) Конструктор за замовчуванням</strong></h3>
-<p>Задає нуль у множині Q (0/1).</p>
-<pre><code class="language-cpp">Fraction() {
+                    <h3><strong>2. Конструктори</strong></h3>
+                    <h4><strong>а) Конструктор за замовчуванням</strong></h4>
+                    <p>Задає нуль у множині Q (0/1).</p>
+                    <pre><code class="language-cpp">Fraction() {
     num = 0;
     den = 1U;
 }</code></pre>
-<p>Або коротко через <strong>список ініціалізації</strong>:</p>
-<pre><code class="language-cpp">Fraction() : num(0), den(1) {}</code></pre>
-<hr>
-<h3><strong>б) Конструктор з параметрами</strong></h3>
-<pre><code class="language-cpp">Fraction(int a, unsigned b) {
+                    <p>Або коротко через <strong>список ініціалізації</strong>:</p>
+                    <pre><code class="language-cpp">Fraction() : num(0), den(1) {}</code></pre>
+                    <hr/>
+                    <h4><strong>б) Конструктор з параметрами</strong></h4>
+                    <pre><code class="language-cpp">Fraction(int a, unsigned b) {
     if (b != 0) {
         num = a;
         den = b;
@@ -291,18 +352,21 @@ Output: 2.5 7.8</code></pre>
         den = 1;
     }
 }</code></pre>
-<p><strong>Пояснення:</strong></p>
-<ul>
-<li>якщо знаменник не нуль — дроб правильно задано;</li>
-<li>якщо знаменник 0 — вважається, що дроб некоректний (num = INT_MAX).</li>
-</ul>
-<p><strong>Приклади:</strong></p>
-<pre><code class="language-cpp">Fraction half(1, 2);     // 1/2
+                    <p><strong>Пояснення:</strong></p>
+                    <ul>
+                        <li>якщо знаменник не нуль — дроб правильно задано;</li>
+                        <li>
+                            якщо знаменник 0 — вважається, що дроб некоректний (num =
+                            INT_MAX).
+                        </li>
+                    </ul>
+                    <p><strong>Приклади:</strong></p>
+                    <pre><code class="language-cpp">Fraction half(1, 2);     // 1/2
 Fraction quarters(3, 4); // 3/4
 Fraction zero;           // 0/1</code></pre>
-<h2><strong>3. Розділення на файли</strong></h2>
-<h3><strong>Файл Fraction.h</strong></h3>
-<pre><code class="language-cpp">#pragma once
+                    <h3><strong>3. Розділення на файли</strong></h3>
+                    <h4><strong>Файл Fraction.h</strong></h4>
+                    <pre><code class="language-cpp">#pragma once
 #include &lt;iostream&gt;
 using std::ostream;
 
@@ -316,8 +380,8 @@ struct Fraction {
 
 // прототип оператора виведення
 ostream&amp; operator&lt;&lt;(ostream&amp; os, const Fraction&amp; q);</code></pre>
-<h3><strong>Файл Fraction.cpp</strong></h3>
-<pre><code class="language-cpp">#include "Fraction.h"
+                    <h4><strong>Файл Fraction.cpp</strong></h4>
+                    <pre><code class="language-cpp">#include "Fraction.h"
 #include &lt;climits&gt;
 
 Fraction::Fraction(int a, unsigned b) {
@@ -329,55 +393,57 @@ ostream&amp; operator&lt;&lt;(ostream&amp; os, const Fraction&amp; q) {
     os &lt;&lt; q.num &lt;&lt; '/' &lt;&lt; q.den;
     return os;
 }</code></pre>
-<h2><strong>4. Оператор виведення</strong></h2>
-<h2><strong><<</strong></h2>
-<p><strong>Пояснення:</strong></p>
-<ul>
-<li>перевантажуємо оператор <<, щоб можна було писати:</li>
-</ul>
-<pre><code class="language-cpp">cout &lt;&lt; q;</code></pre>
-<ul>
-<li>виводить дріб у форматі “чисельник/знаменник”.</li>
-</ul>
-<p><strong>Результат:</strong></p>
-<pre><code class="language-cpp">Fraction f(3, 5);
+                    <h3><strong>4. Оператор виведення <<</strong></h3>
+                    <p><strong>Пояснення:</strong></p>
+                    <ul>
+                        <li>перевантажуємо оператор <<, щоб можна було писати:</li>
+                    </ul>
+                    <pre><code class="language-cpp">cout &lt;&lt; q;</code></pre>
+                    <ul>
+                        <li>виводить дріб у форматі “чисельник/знаменник”.</li>
+                    </ul>
+                    <p><strong>Результат:</strong></p>
+                    <pre><code class="language-cpp">Fraction f(3, 5);
 cout &lt;&lt; f;   // виведе: 3/5</code></pre>
-<h2><strong>5. Підсумок</strong></h2>
-<table class="table table-bordered table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th><strong>Елемент</strong></th>
-      <th><strong>Призначення</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>num</td>
-      <td>чисельник (int)</td>
-    </tr>
-    <tr>
-      <td>den</td>
-      <td>знаменник (unsigned, ≠ 0)</td>
-    </tr>
-    <tr>
-      <td>Fraction()</td>
-      <td>створює 0/1</td>
-    </tr>
-    <tr>
-      <td>Fraction(a, b)</td>
-      <td>створює a/b або помилку, якщо b=0</td>
-    </tr>
-    <tr>
-      <td>operator<<</td>
-      <td>виводить дріб у вигляді "a/b"</td>
-    </tr>
-  </tbody>
-</table>
-<hr>
-<h1><strong>Приклади використання типу Fraction</strong></h1>
-<p><strong>Мета:</strong> показати, як створювати, присвоювати і виводити об’єкти типу Fraction.</p>
-<h2><strong>Код прикладу</strong></h2>
-<pre><code class="language-cpp">#include "Fraction.h"
+                    <h3><strong>5. Підсумок</strong></h3>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th><strong>Елемент</strong></th>
+                            <th><strong>Призначення</strong></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>num</td>
+                            <td>чисельник (int)</td>
+                        </tr>
+                        <tr>
+                            <td>den</td>
+                            <td>знаменник (unsigned, ≠ 0)</td>
+                        </tr>
+                        <tr>
+                            <td>Fraction()</td>
+                            <td>створює 0/1</td>
+                        </tr>
+                        <tr>
+                            <td>Fraction(a, b)</td>
+                            <td>створює a/b або помилку, якщо b=0</td>
+                        </tr>
+                        <tr>
+                            <td>operator<<</td>
+                            <td>виводить дріб у вигляді "a/b"</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <hr/>
+                    <h2><strong>Приклади використання типу Fraction</strong></h2>
+                    <p>
+                        <strong>Мета:</strong> показати, як створювати, присвоювати і
+                        виводити об’єкти типу Fraction.
+                    </p>
+                    <h3><strong>Код прикладу</strong></h3>
+                    <pre><code class="language-cpp">#include "Fraction.h"
 using std::cout;
 
 int main()
@@ -395,81 +461,91 @@ int main()
     system("pause");
     return 0;
 }</code></pre>
-<h2><strong>Пояснення крок за кроком</strong></h2>
-<ol>
-<li><strong>Створення об’єктів</strong></li>
-</ol>
-<pre><code class="language-cpp">Fraction half(1, 2);
+                    <h3><strong>Пояснення крок за кроком</strong></h3>
+                    <ol>
+                        <li><strong>Створення об’єктів</strong></li>
+                    </ol>
+                    <pre><code class="language-cpp">Fraction half(1, 2);
 Fraction quarters(3, 4);
 Fraction zero;
 Fraction copy;</code></pre>
-<ul>
-<li>half → представляє 1/2</li>
-<li>quarters → 3/4</li>
-<li>zero → створюється за замовчуванням (0/1)</li>
-<li>copy → поки не ініціалізований власним значенням</li>
-<ol>
-<li><strong>Присвоєння структур</strong></li>
-</ul>
-</ol>
-<pre><code class="language-cpp">copy = half;</code></pre>
-<ul>
-<li>у C++ <strong>структури можна копіювати</strong> — усі поля num і den автоматично копіюються;</li>
-<li>після виконання цього рядка copy має ті самі значення, що і half.</li>
-</ul>
-<hr>
-<ol>
-<li><strong>Виведення</strong></li>
-</ol>
-<pre><code class="language-cpp">cout &lt;&lt; "half = " &lt;&lt; half;</code></pre>
-<ul>
-<li>завдяки перевантаженому оператору <<, об’єкти типу Fraction виводяться у форматі:</li>
-</ul>
-<pre><code class="language-cpp">чисельник/знаменник</code></pre>
-<ul>
-<li>наприклад, half = 1/2, quarters = 3/4, zero = 0/1, copy = 1/2.</li>
-<ol>
-<li><strong>Виконання</strong></li>
-</ul>
-</ol>
-    
-    Програма виведе:
-<pre><code class="language-cpp">half = 1/2
+                    <ul>
+                        <li>half → представляє 1/2</li>
+                        <li>quarters → 3/4</li>
+                        <li>zero → створюється за замовчуванням (0/1)</li>
+                        <li>copy → поки не ініціалізований власним значенням</li>
+                    </ul>
+                    <ol start="2">
+                        <li><strong>Присвоєння структур</strong></li>
+                    </ol>
+                    <pre><code class="language-cpp">copy = half;</code></pre>
+                    <ul>
+                        <li>
+                            у C++ <strong>структури можна копіювати</strong> — усі поля
+                            num і den автоматично копіюються;
+                        </li>
+                        <li>
+                            після виконання цього рядка copy має ті самі значення, що і
+                            half.
+                        </li>
+                    </ul>
+                    <hr/>
+                    <ol start="3">
+                        <li><strong>Виведення</strong></li>
+                    </ol>
+                    <pre><code class="language-cpp">cout &lt;&lt; "half = " &lt;&lt; half;</code></pre>
+                    <ul>
+                        <li>
+                            завдяки перевантаженому оператору <<, об’єкти типу Fraction
+                            виводяться у форматі:
+                        </li>
+                    </ul>
+                    <pre><code class="language-cpp">чисельник/знаменник</code></pre>
+                    <ul>
+                        <li>
+                            наприклад, half = 1/2, quarters = 3/4, zero = 0/1, copy = 1/2.
+                        </li>
+                    </ul>
+                    <ol start="4">
+                        <li><strong>Виконання</strong></li>
+                    </ol>
+
+                    Програма виведе:
+                    <pre><code class="language-cpp">half = 1/2
 quarters = 3/4
 zero = 0/1
 copy = 1/2</code></pre>
-<h2><strong>Висновок</strong></h2>
-<p>| <strong>Елемент</strong> | <strong>Опис</strong> |
-<table class="table table-bordered table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th><strong>Код</strong></th>
-      <th><strong>Результат</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Fraction half(1, 2);</td>
-      <td>створює дріб 1/2</td>
-    </tr>
-    <tr>
-      <td>Fraction zero;</td>
-      <td>створює 0/1</td>
-    </tr>
-    <tr>
-      <td>copy = half;</td>
-      <td>копіює значення структури</td>
-    </tr>
-    <tr>
-      <td>cout << f;</td>
-      <td>друкує дріб через перевантажений оператор <<</td>
-    </tr>
-  </tbody>
-</table>
-<hr>
-<h1><strong>Функції для опрацювання структур</strong></h1>
-<h2><strong>1. Структури для координат</strong></h2>
-<pre><code class="language-cpp">struct Point {          // Декартові координати точки на площині
+                    <h3><strong>Висновок</strong></h3>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th><strong>Код</strong></th>
+                            <th><strong>Результат</strong></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Fraction half(1, 2);</td>
+                            <td>створює дріб 1/2</td>
+                        </tr>
+                        <tr>
+                            <td>Fraction zero;</td>
+                            <td>створює 0/1</td>
+                        </tr>
+                        <tr>
+                            <td>copy = half;</td>
+                            <td>копіює значення структури</td>
+                        </tr>
+                        <tr>
+                            <td>cout << f;</td>
+                            <td>друкує дріб через перевантажений оператор <<</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <hr/>
+                    <h2><strong>Функції для опрацювання структур</strong></h2>
+                    <h3><strong>1. Структури для координат</strong></h3>
+                    <pre><code class="language-cpp">struct Point {          // Декартові координати точки на площині
     double x;
     double y;
 };
@@ -478,22 +554,22 @@ struct PolarPoint {     // Полярні координати точки
     double ro;          // довжина радіус-вектора
     double phi;         // кут у градусах
 };</code></pre>
-<h2><strong>2. Перетворення між координатами</strong></h2>
-<h3><strong>2.1. З декартових у полярні</strong></h3>
-<pre><code class="language-cpp">PolarPoint CartToPolar(Point c)
+                    <h3><strong>2. Перетворення між координатами</strong></h3>
+                    <h4><strong>2.1. З декартових у полярні</strong></h4>
+                    <pre><code class="language-cpp">PolarPoint CartToPolar(Point c)
 {
     PolarPoint answer;
     answer.ro = sqrt(c.x * c.x + c.y * c.y);
     answer.phi = atan2(c.y, c.x) / M_PI * 180;  // перехід у градуси
     return answer;
 }</code></pre>
-<p><strong>Пояснення:</strong></p>
-<ul>
-<li>$ro = √(x² + y²)$ — довжина радіус-вектора</li>
-<li>$phi = arctan(y/x)$ — кут нахилу в градусах</li>
-</ul>
-<h3><strong>2.2. З полярних у декартові</strong></h3>
-<pre><code class="language-cpp">Point PolarToCart(const PolarPoint&amp; p)
+                    <p><strong>Пояснення:</strong></p>
+                    <ul>
+                        <li>$ro = √(x² + y²)$ — довжина радіус-вектора</li>
+                        <li>$phi = arctan(y/x)$ — кут нахилу в градусах</li>
+                    </ul>
+                    <h4><strong>2.2. З полярних у декартові</strong></h4>
+                    <pre><code class="language-cpp">Point PolarToCart(const PolarPoint&amp; p)
 {
     double alpha = p.phi / 180 * M_PI;  // переведення у радіани
     Point answer;
@@ -501,29 +577,28 @@ struct PolarPoint {     // Полярні координати точки
     answer.y = p.ro * sin(alpha);
     return answer;
 }</code></pre>
-<p><strong>Пояснення:</strong></p>
-<ul>
-<li>$x = r <em> cos(φ)$</li>
-<li>$y = r </em> sin(φ)$</li>
-</ul>
-<h2><strong>3. Функції для структури</strong></h2>
-<h2><strong>Fraction</strong></h2>
-<pre><code class="language-cpp">struct Fraction {
+                    <p><strong>Пояснення:</strong></p>
+                    <ul>
+                        <li>$x = r * cos(φ)$</li>
+                        <li>$y = r * sin(φ)$</li>
+                    </ul>
+                    <h3><strong>3. Функції для структури Fraction</strong></h3>
+                    <pre><code class="language-cpp">struct Fraction {
     int num;         // чисельник
     unsigned den;    // знаменник
 
     Fraction() : num(0), den(1) {}          // конструктор за замовчуванням
     Fraction(int a, unsigned b);            // конструктор з параметрами
 };</code></pre>
-<h3><strong>3.1. Допоміжні функції</strong></h3>
-<pre><code class="language-cpp">void Simplify(Fraction&amp;);
+                    <h4><strong>3.1. Допоміжні функції</strong></h4>
+                    <pre><code class="language-cpp">void Simplify(Fraction&amp;);
 istream&amp; operator&gt;&gt;(istream&amp; is, Fraction&amp; q);
 ostream&amp; operator&lt;&lt;(ostream&amp; os, const Fraction&amp; q);
 Fraction operator+(const Fraction&amp;, const Fraction&amp;);
 Fraction operator*(const Fraction&amp;, const Fraction&amp;);</code></pre>
-<h3><strong>3.2. Реалізація у Fraction.cpp</strong></h3>
-<h3><strong>Скорочення дробу</strong></h3>
-<pre><code class="language-cpp">void Simplify(Fraction&amp; f)
+                    <h4><strong>3.2. Реалізація у Fraction.cpp</strong></h4>
+                    <h4><strong>Скорочення дробу</strong></h4>
+                    <pre><code class="language-cpp">void Simplify(Fraction&amp; f)
 {
     if (f.num == 0) { f.den = 1; return; }
     int a = abs(f.num), b = f.den;
@@ -532,16 +607,16 @@ Fraction operator*(const Fraction&amp;, const Fraction&amp;);</code></pre>
     f.num /= a;
     f.den /= a;
 }</code></pre>
-<h3><strong>Ввід дробу</strong></h3>
-<pre><code class="language-cpp">istream&amp; operator&gt;&gt;(istream&amp; is, Fraction&amp; q)
+                    <h4><strong>Ввід дробу</strong></h4>
+                    <pre><code class="language-cpp">istream&amp; operator&gt;&gt;(istream&amp; is, Fraction&amp; q)
 {
     int a, b;
     is &gt;&gt; a &gt;&gt; b;
     q = (b &lt; 0) ? Fraction(-a, -b) : Fraction(a, b);
     return is;
 } @</code></pre>
-<h3><strong>Додавання і множення</strong></h3>
-<pre><code class="language-cpp">Fraction operator+(const Fraction&amp; l, const Fraction&amp; r)
+                    <h4><strong>Додавання і множення</strong></h4>
+                    <pre><code class="language-cpp">Fraction operator+(const Fraction&amp; l, const Fraction&amp; r)
 {
     return Fraction(l.num * r.den + r.num * l.den, l.den * r.den);
 }
@@ -550,8 +625,8 @@ Fraction operator*(const Fraction&amp; l, const Fraction&amp; r)
 {
     return Fraction(l.num * r.num, l.den * r.den);
 }</code></pre>
-<h2><strong>4. Приклад використання</strong></h2>
-<pre><code class="language-cpp">const int N = 10;
+                    <h3><strong>4. Приклад використання</strong></h3>
+                    <pre><code class="language-cpp">const int N = 10;
 Fraction f[N];
 
 for (int i = 0; i &lt; N; ++i)
@@ -562,32 +637,52 @@ for (int i = 0; i &lt; N; ++i)
     S = S + f[i];
 
 cout &lt;&lt; "average = " &lt;&lt; S * Fraction(1, N) &lt;&lt; '\n';</code></pre>
-<p><strong>Пояснення:</strong></p>
-<ul>
-<li>Вводимо масив дробів</li>
-<li>Обчислюємо їхню суму</li>
-<li>Множимо на 1/N, щоб знайти середнє значення</li>
-</ul>
-<h2><strong>5. Підсумок</strong></h2>
-<ul>
-<li><strong>Структура</strong> — новий тип даних, який програміст створює сам.</li>
-<li><strong>Структура</strong> об’єднує кілька полів різних типів.</li>
-<li><strong>Конструктор</strong> керує створенням екземпляра структури.</li>
-<li>Структуру можна використовувати як <strong>повноцінний тип</strong> для параметрів функцій і результатів.</li>
-<li>Функції з ім’ям operator дозволяють <strong>перевантажити стандартні оператори</strong> (+, *, >>, <<).</li>
-<li>Структури з конструкторами й операторами можна використовувати так само, як звичайні числові типи.</li>
-</ul>
-          </div>
-        </div>
-      </article>
+                    <p><strong>Пояснення:</strong></p>
+                    <ul>
+                        <li>Вводимо масив дробів</li>
+                        <li>Обчислюємо їхню суму</li>
+                        <li>Множимо на 1/N, щоб знайти середнє значення</li>
+                    </ul>
+                    <h3><strong>5. Підсумок</strong></h3>
+                    <ul>
+                        <li>
+                            <strong>Структура</strong> — новий тип даних, який програміст
+                            створює сам.
+                        </li>
+                        <li>
+                            <strong>Структура</strong> об’єднує кілька полів різних типів.
+                        </li>
+                        <li>
+                            <strong>Конструктор</strong> керує створенням екземпляра
+                            структури.
+                        </li>
+                        <li>
+                            Структуру можна використовувати як
+                            <strong>повноцінний тип</strong> для параметрів функцій і
+                            результатів.
+                        </li>
+                        <li>
+                            Функції з ім’ям operator дозволяють
+                            <strong>перевантажити стандартні оператори</strong> (+, *, >>,
+                            <<).
+                        </li>
+                        <li>
+                            Структури з конструкторами й операторами можна використовувати
+                            так само, як звичайні числові типи.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </article>
     </div>
-  </main>
+</main>
 
-  <footer class="bg-dark text-white text-center py-4 mt-5">
+<footer class="bg-dark text-white text-center py-4 mt-5">
     <div class="container">
-      <p class="mb-0">Золотарьов Тимофій. 2025 Конспект лекцій з програмування.</p>
+        <p class="mb-0">
+            Золотарьов Тимофій. 2025 Конспект лекцій з програмування.
+        </p>
     </div>
-  </footer>
+</footer>
 </body>
-
 </html>

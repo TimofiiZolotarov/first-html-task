@@ -1,99 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Програмування - Конспект лекцій</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
-  <meta name="description" content="Конспект лекцій з програмування на C++">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Програмування - Конспект лекцій</title>
 
-  <meta property="og:title" content="Програмування - Конспект лекцій">
-  <meta property="og:type" content="website">
-  <meta property="og:description" content="Конспект лекцій з програмування на C++">
+    <!-- https://getbootstrap.com/docs/5.3/getting-started/introduction/#cdn-links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"/>
 
-  <link rel="icon" href="https://www.w3schools.com/favicon.ico" sizes="any">
+    <!-- https://highlightjs.readthedocs.io/en/latest/readme.html -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css"
+          rel="stylesheet"/>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
+    <meta content="Конспект лекцій з програмування на C++" name="description"/>
+
+    <link href="https://www.w3schools.com/favicon.ico" rel="icon" sizes="any"/>
+
+    <!-- https://highlightjs.readthedocs.io/en/latest/readme.html -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
 </head>
 
 <body class="bg-light">
-  <header class="bg-dark text-white py-4 mb-4">
+<header class="bg-dark text-white py-4 mb-4">
     <div class="container-fluid">
-      <a href="index.html" class="text-white text-decoration-none"><h1 class="mb-0">Програмування</h1></a>
+        <a class="text-white text-decoration-none" href="index.html"><h1 class="mb-0">Програмування</h1></a>
     </div>
-  </header>
+</header>
 
-  <main class="container-fluid">
+<main class="container-fluid">
     <div class="row">
-      <aside class="col-lg-3 mb-4">
-        <nav class="card sticky-lg-top">
-          <div class="card-body">
-            <h5 class="card-title">Зміст</h5>
-            <ul class="list-unstyled">
-              <li class="mb-2"><a href="lecture-6.html" class="text-decoration-none">Функції, параметри, вказівники</a></li>
-              <li class="mb-2"><a href="lecture-7.html" class="text-decoration-none">Масиви</a></li>
-              <li class="mb-2"><a href="lecture-8.html" class="text-decoration-none">Структури, конструктори</a></li>
-              <li class="mb-2"><a href="lecture-9.html" class="text-decoration-none">Лінійні списки</a></li>
-              <li class="mb-2"><a href="lecture-11.html" class="text-decoration-none">Потоки, рекурсія</a></li>
-              <li class="mb-2"><a href="lecture-13.html" class="text-decoration-none">Класи</a></li>
-              <li class="mb-2"><a href="lecture-15.html" class="text-decoration-none">Обробка помилок</a></li>
-            </ul>
-          </div>
-        </nav>
-      </aside>
+        <aside class="col-lg-3 mb-4">
+            <nav class="card sticky-lg-top">
+                <div class="card-body">
+                    <h5 class="card-title">Зміст</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-6.html">Функції, параметри, вказівники</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-7.html">Масиви</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-8.html">Структури, конструктори</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-9.html">Лінійні списки</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-11.html">Потоки, рекурсія</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-13.html">Класи</a>
+                        </li>
+                        <li class="mb-2">
+                            <a class="text-decoration-none" href="lecture-15.html">Обробка помилок</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
 
-      <article class="col-lg-9">
-        <div class="card">
-          <div class="card-body">
-            <h1>Конспект лекцій з програмування</h1>
+        <article class="col-lg-9">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Конспект лекцій з програмування</h2>
 
-            <h2>Ласкаво просимо!</h2>
-            <p>Цей проект містить конспект лекцій з програмування на мові C++. Матеріал охоплює основні концепції програмування від функцій та масивів до об'єктно-орієнтованого програмування та обробки помилок.</p>
+                    <h3>Ласкаво просимо!</h3>
+                    <p>
+                        Цей проект містить конспект лекцій з програмування на мові C++.
+                        Матеріал охоплює основні концепції програмування від функцій та
+                        масивів до об'єктно-орієнтованого програмування та обробки
+                        помилок.
+                    </p>
 
-            <h2>Структура курсу</h2>
-            <ul>
-              <li><strong>Лекція 6:</strong> Функції, параметри, вказівники</li>
-              <li><strong>Лекція 7:</strong> Масиви та їх використання</li>
-              <li><strong>Лекція 8:</strong> Структури та конструктори</li>
-              <li><strong>Лекція 9:</strong> Лінійні списки на C++</li>
-              <li><strong>Лекція 11:</strong> Потоки, рекурсія та інші концепції</li>
-              <li><strong>Лекція 13:</strong> Класи та об'єктно-орієнтоване програмування</li>
-              <li><strong>Лекція 15:</strong> Обробка помилок та винятки</li>
-            </ul>
+                    <h3>Структура курсу</h3>
+                    <ul>
+                        <li>
+                            <strong>Лекція 6:</strong> Функції, параметри, вказівники
+                        </li>
+                        <li><strong>Лекція 7:</strong> Масиви та їх використання</li>
+                        <li><strong>Лекція 8:</strong> Структури та конструктори</li>
+                        <li><strong>Лекція 9:</strong> Лінійні списки на C++</li>
+                        <li>
+                            <strong>Лекція 11:</strong> Потоки, рекурсія та інші концепції
+                        </li>
+                        <li>
+                            <strong>Лекція 13:</strong> Класи та об'єктно-орієнтоване
+                            програмування
+                        </li>
+                        <li><strong>Лекція 15:</strong> Обробка помилок та винятки</li>
+                    </ul>
 
-            <h2>Як користуватися цим сайтом</h2>
-            <p>Виберіть лекцію зі змісту ліворуч. Кожна лекція містить:</p>
-            <ul>
-              <li>Теоретичні основи</li>
-              <li>Приклади коду з синтаксичним підсвічуванням</li>
-              <li>Пояснення ключових концепцій</li>
-            </ul>
+                    <h2>Як користуватися цим сайтом</h2>
+                    <p>Виберіть лекцію зі змісту ліворуч. Кожна лекція містить:</p>
+                    <ul>
+                        <li>Теоретичні основи</li>
+                        <li>Приклади коду з синтаксичним підсвічуванням</li>
+                        <li>Пояснення ключових концепцій</li>
+                    </ul>
 
-            <h2>Технічні деталі</h2>
-            <p>Цей проект розроблений як статичний веб-сайт для публікації на GitHub Pages. Він використовує:</p>
-            <ul>
-              <li>Семантичну HTML розмітку</li>
-              <li>Bootstrap 5 для макету</li>
-              <li>Highlight.js для синтаксичного підсвічування коду</li>
-            </ul>
+                    <hr/>
 
-            <hr>
-
-            <p><em>Останнє оновлення: грудень 2025</em></p>
-          </div>
-        </div>
-      </article>
+                    <p><em>Останнє оновлення: грудень 2025</em></p>
+                </div>
+            </div>
+        </article>
     </div>
-  </main>
+</main>
 
-  <footer class="bg-dark text-white text-center py-4 mt-5">
+<footer class="bg-dark text-white text-center py-4 mt-5">
     <div class="container">
-      <p class="mb-0">Золотарьов Тимофій. 2025 Конспект лекцій з програмування.</p>
+        <p class="mb-0">
+            Золотарьов Тимофій. 2025 Конспект лекцій з програмування.
+        </p>
     </div>
-  </footer>
+</footer>
 </body>
-
 </html>
