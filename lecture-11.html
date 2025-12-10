@@ -68,8 +68,8 @@
         <article class="col-lg-9">
             <div class="card">
                 <div class="card-body">
-                    <h1>Lecture n11. Flow, Stream, Throad, Torrent.</h1>
-                    <h1><strong>Використання файлів у C++</strong></h1>
+                    <h2>Lecture n11. Flow, Stream, Throad, Torrent.</h2>
+                    <h2><strong>Використання файлів у C++</strong></h2>
                     <h2><strong>1. Потоки введення та виведення</strong></h2>
                     <p>
                         У C++ усі операції з даними виконуються через
@@ -422,7 +422,7 @@ int main() {
                         <tr>
                             <td>gcount()</td>
                             <td>Повертає кількість прочитаних байтів</td>
-                            <td>cout << cin.gcount();</td>
+                            <td>cout &lt;&lt; cin.gcount();</td>
                         </tr>
                         <tr>
                             <td>putback(char)</td>
@@ -592,7 +592,7 @@ fin.close();</code></pre>
                         </tr>
                         <tr>
                             <td>Записати</td>
-                            <td>fout << "Answer: " << value;</td>
+                            <td>fout &lt;&lt; "Answer: " &lt;&lt; value;</td>
                         </tr>
                         <tr>
                             <td>Закрити</td>
@@ -620,7 +620,7 @@ fin.close();</code></pre>
                             <td>ostringstream</td>
                             <td>запис у рядок</td>
                             <td>
-                                ostringstream sout; sout << a << b; string s = sout.str();
+                                ostringstream sout; sout &lt;&lt; a &lt;&lt; b; string s = sout.str();
                             </td>
                         </tr>
                         </tbody>
@@ -641,37 +641,37 @@ fin.close();</code></pre>
                         <tr>
                             <td>setw(n)</td>
                             <td>ширина поля</td>
-                            <td>cout << setw(10) << x;</td>
+                            <td>cout &lt;&lt; setw(10) &lt;&lt; x;</td>
                         </tr>
                         <tr>
                             <td>setprecision(p)</td>
                             <td>кількість знаків після коми</td>
-                            <td>cout << setprecision(4);</td>
+                            <td>cout &lt;&lt; setprecision(4);</td>
                         </tr>
                         <tr>
                             <td>setfill(ch)</td>
                             <td>символ-заповнювач</td>
-                            <td>cout << setfill('*');</td>
+                            <td>cout &lt;&lt; setfill('*');</td>
                         </tr>
                         <tr>
                             <td>fixed</td>
                             <td>фіксована десяткова форма</td>
-                            <td>cout << fixed;</td>
+                            <td>cout &lt;&lt; fixed;</td>
                         </tr>
                         <tr>
                             <td>scientific</td>
                             <td>експоненційна форма</td>
-                            <td>cout << scientific;</td>
+                            <td>cout &lt;&lt; scientific;</td>
                         </tr>
                         <tr>
                             <td>showpos</td>
                             <td>показувати + перед додатним</td>
-                            <td>cout << showpos;</td>
+                            <td>cout &lt;&lt; showpos;</td>
                         </tr>
                         <tr>
                             <td>showpoint</td>
                             <td>показувати десяткову крапку</td>
-                            <td>cout << showpoint;</td>
+                            <td>cout &lt;&lt; showpoint;</td>
                         </tr>
                         </tbody>
                     </table>
@@ -721,7 +721,7 @@ int main() {
                         </tr>
                         <tr>
                             <td>Записати таблицю у файл</td>
-                            <td>ostream& os = fout; os << setw(10) << value;</td>
+                            <td>ostream& os = fout; os &lt;&lt; setw(10) &lt;&lt; value;</td>
                         </tr>
                         <tr>
                             <td>Прочитати з рядка</td>
@@ -730,7 +730,7 @@ int main() {
                         </tbody>
                     </table>
                     <hr>
-                    <h1><strong>Методи класу istream</strong></h1>
+                    <h2><strong>Методи класу istream</strong></h2>
                     <p><strong>1. ignore(int k = 1, int t = EOF)</strong></p>
                     <p>→ пропускає k символів або досягнення символу t.</p>
                     <p>Зручно для очищення буфера після cin.</p>
@@ -759,7 +759,7 @@ cout &lt;&lt; "Прочитано: " &lt;&lt; cin.gcount() &lt;&lt; " байті
 cin.get(c);
 if (isdigit(c)) cin.putback(c);</code></pre>
                     <hr>
-                    <h1><strong>Що таке файл</strong></h1>
+                    <h2><strong>Що таке файл</strong></h2>
                     <ul>
                         <li>
                             Іменована ділянка дискового простору з атрибутами (ім’я, тип,
@@ -779,7 +779,7 @@ if (isdigit(c)) cin.putback(c);</code></pre>
                         </li>
                     </ul>
                     <hr>
-                    <h1><strong>Навіщо файл програмі</strong></h1>
+                    <h2><strong>Навіщо файл програмі</strong></h2>
                     <ol>
                         <li>Зчитати великі обсяги вхідних даних.</li>
                         <li>Зберегти результати роботи програми.</li>
@@ -787,7 +787,7 @@ if (isdigit(c)) cin.putback(c);</code></pre>
                         <li>Передати дані іншій програмі.</li>
                     </ol>
                     <hr>
-                    <h1><strong>Схема читання даних з файлу</strong></h1>
+                    <h2><strong>Схема читання даних з файлу</strong></h2>
                     <pre><code class="language-cpp">#include &lt;fstream&gt;
 using namespace std;
 
@@ -804,7 +804,7 @@ int main() {
                     <p>Короткий варіант:</p>
                     <pre><code class="language-cpp">ifstream fin("data.txt");</code></pre>
                     <hr>
-                    <h1><strong>Приклад функції читання масиву з файлу</strong></h1>
+                    <h2><strong>Приклад функції читання масиву з файлу</strong></h2>
                     <pre><code class="language-cpp">#include &lt;fstream&gt;
 using namespace std;
 
@@ -821,7 +821,7 @@ int main() {
     fin.close();
 }</code></pre>
                     <hr>
-                    <h1><strong>Приклад підрахунку суми з файлу</strong></h1>
+                    <h2><strong>Приклад підрахунку суми з файлу</strong></h2>
                     <pre><code class="language-cpp">const char* fileName = "numbers.txt";
 ifstream fin(fileName);
 
@@ -834,7 +834,7 @@ if (fin.is_open()) {
 }
 fin.close();</code></pre>
                     <hr>
-                    <h1><strong>Схема запису у файл</strong></h1>
+                    <h2><strong>Схема запису у файл</strong></h2>
                     <pre><code class="language-cpp">#include &lt;fstream&gt;
 using namespace std;
 
@@ -850,7 +850,7 @@ int main() {
                     <p>Коротко:</p>
                     <pre><code class="language-cpp">ofstream fout("result.txt");</code></pre>
                     <hr>
-                    <h1><strong>Табуляція значень у файл</strong></h1>
+                    <h2><strong>Табуляція значень у файл</strong></h2>
                     <pre><code class="language-cpp">void TabulateToStream(ostream&amp; os, double (*f)(double),
                       double a, double b, double h) {
     os &lt;&lt; "x\tf(x)\n";
@@ -865,7 +865,7 @@ int main() {
     fout.close();
 }</code></pre>
                     <hr>
-                    <h1><strong>Читання та запис з рядка</strong></h1>
+                    <h2><strong>Читання та запис з рядка</strong></h2>
                     <pre><code class="language-cpp">#include &lt;sstream&gt;
 #include &lt;string&gt;
 using namespace std;
@@ -881,7 +881,7 @@ int main() {
     string text = sout.str();  // отримати результат
 }</code></pre>
                     <hr>
-                    <h1><strong>Режими відкриття файлу</strong></h1>
+                    <h2><strong>Режими відкриття файлу</strong></h2>
                     <pre><code class="language-cpp">fin.open(fileName, modeConst);</code></pre>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
@@ -920,7 +920,7 @@ int main() {
                     <p>Комбінації можливі:</p>
                     <pre><code class="language-cpp">ofstream fout("log.txt", ios::app | ios::out);</code></pre>
                     <hr>
-                    <h1><strong>Підсумок</strong></h1>
+                    <h2><strong>Підсумок</strong></h2>
                     <ol>
                         <li>Для роботи з файлами використовують fstream.</li>
                         <li>
